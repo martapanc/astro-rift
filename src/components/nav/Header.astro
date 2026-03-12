@@ -5,6 +5,8 @@ import HeaderLink from './HeaderLink.astro';
 import DarkModeToggle from './DarkModeToggle.astro';
 import { Icon } from 'astro-icon/components';
 
+import LogoImage from '@/assets/logo.png';
+
 const pathname = Astro.url.pathname;
 
 // Check if any child URL matches the current path
@@ -54,7 +56,7 @@ const isDropdownActive = (item: MenuItem) => {
             >
                 <h1 id="title" class="text-2xl sm:text-4xl">
                     <a href="/">
-                        <img src="/public/logo.png" alt="logo" />
+                        <img src={LogoImage.src} alt="logo" />
                     </a>
                 </h1>
                 <h2 id="description" class="text-sm sm:text-base" set:html={SITE_DESCRIPTION} />

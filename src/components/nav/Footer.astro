@@ -11,7 +11,7 @@ const today = new Date();
 ---
 
 <footer>
-    <div class="flex justify-between bg-[#1a1a1a] py-16 pb-8">
+    <div class="flex justify-between bg-[#130f20] py-16 pb-8">
         <div
             class="container flex flex-col justify-between gap-y-4 text-center md:flex-row md:text-left"
         >
@@ -38,7 +38,7 @@ const today = new Date();
             </div>
         </div>
     </div>
-    <div class="bg-black">
+    <div class="bg-[#0a0814]">
         <div class="container flex flex-col items-center gap-4 px-6 pt-6 pb-12 text-center">
             <span class="text-gray-300">
                 <a href={`mailto:${email}`} target="_blank">{email}</a> &copy; {getYear(today)}
@@ -67,7 +67,8 @@ const today = new Date();
             @apply font-bold;
 
             a {
-                @apply text-primary no-underline;
+                @apply no-underline;
+                color: #f59e0b;
             }
         }
     }

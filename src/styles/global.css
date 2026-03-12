@@ -72,19 +72,19 @@
 }
 
 :root {
-    --primary: #304b96;
-    --secondary: #283e7d;
+    --primary: #5b21b6;
+    --secondary: #4c1d95;
 
-    --accent: #345f9f;
-    --background: #f7fbff;
+    --accent: #7c3aed;
+    --background: #faf7ff;
     --white: #fff;
-    --black: #0f1219;
-    --border: #ecf4ff;
-    --text: #4e565e;
+    --black: #0f0a1f;
+    --border: #ede9fe;
+    --text: #4a3f5c;
 
-    --gray: 96, 115, 159;
-    --gray-light: 229, 233, 240;
-    --gray-dark: 34, 41, 57;
+    --gray: 105, 92, 135;
+    --gray-light: 237, 233, 247;
+    --gray-dark: 38, 28, 60;
     --gray-gradient: rgba(var(--gray-light), 50%), #fff;
     --box-shadow:
         0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
@@ -93,20 +93,20 @@
 
 /* Dark mode color overrides */
 :root.dark {
-    --primary: #b63083;
-    --secondary: #db53ab;
+    --primary: #f59e0b;
+    --secondary: #fbbf24;
 
-    --accent: #cd3f97;
-    --background: #000;
-    --white: #1a1a1a;
-    --black: #f5f5f5;
-    --border: #333333;
-    --text: #ffffff;
+    --accent: #d97706;
+    --background: #130f20;
+    --white: #1e1830;
+    --black: #f5f0ff;
+    --border: #2d2548;
+    --text: #e8e0f5;
 
-    --gray: 163, 175, 198;
-    --gray-light: 40, 44, 52;
-    --gray-dark: 230, 233, 240;
-    --gray-gradient: rgba(30, 33, 40, 50%), #1a1d24;
+    --gray: 174, 160, 200;
+    --gray-light: 38, 30, 58;
+    --gray-dark: 235, 228, 250;
+    --gray-gradient: rgba(30, 24, 48, 50%), #1a1530;
     --box-shadow:
         0 2px 6px rgba(0, 0, 0, 50%), 0 8px 24px rgba(0, 0, 0, 60%), 0 16px 32px rgba(0, 0, 0, 60%);
 }
@@ -453,7 +453,7 @@ h3.wp-block-heading:before {
 /* Citation links in text */
 .prose a[href^='#ref-'] {
     @apply bg-primary/5 hover:bg-primary/10 dark:bg-primary/15 dark:hover:bg-primary/20 rounded-xs px-[1px];
-    @apply font-mono text-sm font-semibold text-blue-900 no-underline dark:text-fuchsia-50;
+    @apply font-mono text-sm font-semibold text-violet-900 no-underline dark:text-amber-50;
     scroll-margin-top: 1rem;
 }
 
@@ -607,17 +607,17 @@ h3.wp-block-heading:before {
     /* Reset dark mode CSS variables to light mode values for printing */
     :root.dark {
         color-scheme: light;
-        --primary: #304b96;
-        --secondary: #283e7d;
-        --accent: #345f9f;
+        --primary: #5b21b6;
+        --secondary: #4c1d95;
+        --accent: #7c3aed;
         --background: #fff;
         --white: #fff;
-        --black: #0f1219;
-        --border: #ecf4ff;
-        --text: #4e565e;
-        --gray: 96, 115, 159;
-        --gray-light: 229, 233, 240;
-        --gray-dark: 34, 41, 57;
+        --black: #0f0a1f;
+        --border: #ede9fe;
+        --text: #4a3f5c;
+        --gray: 105, 92, 135;
+        --gray-light: 237, 233, 247;
+        --gray-dark: 38, 28, 60;
     }
 
     html,
@@ -641,7 +641,7 @@ h3.wp-block-heading:before {
     }
 
     .dark a {
-        color: #283e7d !important;
+        color: #4c1d95 !important;
     }
 
     /* Restore light backgrounds for dark-mode elements */
