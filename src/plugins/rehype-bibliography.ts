@@ -30,10 +30,10 @@ export default function rehypeBibliography() {
 
         // First pass: collect bibliography entries
         visit(tree, 'element', (node: Element) => {
-            // Detect Bibliografia heading
+            // Detect Bibliography heading
             if (node.tagName === 'h2') {
                 const text = getTextContent(node);
-                if (text === 'Bibliografia') {
+                if (text === 'Bibliography') {
                     inBibliography = true;
                     return;
                 }
@@ -93,10 +93,10 @@ export default function rehypeBibliography() {
         inBibliography = false;
 
         visit(tree, 'element', (node: Element, index, parent) => {
-            // Detect Bibliografia heading again
+            // Detect Bibliography heading again
             if (node.tagName === 'h2') {
                 const text = getTextContent(node);
-                if (text === 'Bibliografia') {
+                if (text === 'Bibliography') {
                     inBibliography = true;
                     return;
                 }

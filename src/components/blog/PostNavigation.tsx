@@ -15,7 +15,7 @@ export default function PostNavigation({ prev, next }: Props) {
             <div className="flex-1">
                 {prev && (
                     <a
-                        href={`/${prev.id}`}
+                        href={`/posts/${prev.id}`}
                         className="group flex flex-col justify-between text-left transition-colors hover:text-[var(--primary)]"
                     >
                         <span className="mb-1.5 text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">
@@ -31,7 +31,7 @@ export default function PostNavigation({ prev, next }: Props) {
             <div className="flex-1 text-right">
                 {next && (
                     <a
-                        href={`/${next.id}`}
+                        href={`/posts/${next.id}`}
                         className="group flex flex-col justify-between text-right transition-colors hover:text-[var(--primary)]"
                     >
                         <span className="mb-1.5 text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">

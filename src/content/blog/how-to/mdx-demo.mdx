@@ -1,0 +1,96 @@
+---
+title: What MDX Unlocks
+category: How-To
+pubDate: 2026-03-12
+tags: mdx, react, components
+heroImage: '@/assets/how-to/mdx-demo/heroImage.png'
+excerpt: MDX lets you use React components and JavaScript expressions right inside your Markdown. Here's what that looks like in practice.
+draft: false
+featured: true
+featuredRaking: 3
+---
+
+import { Box } from '@/components/shared/Box.tsx';
+
+MDX is Markdown with superpowers. Everything you can write in a regular `.md` file works exactly the same here — paragraphs, **bold**, *italic*, headings, lists, code blocks, and so on. The difference is that you can also import React components and drop them anywhere in the content.
+
+---
+
+## Importing components
+
+At the top of this file (below the frontmatter) the `Box` component is imported:
+
+```mdx
+import { Box } from '@/components/shared/Box.tsx';
+```
+
+It can then be used anywhere in the body, just like regular JSX:
+
+<Box>
+  This paragraph is rendered inside the `Box` component — the same one used throughout the site for sidebars and UI cards. No wrapper page needed, no custom layout. It's just a component call, right here in the post.
+</Box>
+
+---
+
+## Inline JavaScript expressions
+
+MDX evaluates `{expression}` blocks as JavaScript. This means you can compute values inline:
+
+- Current year: **{new Date().getFullYear()}**
+- Simple arithmetic: **{6 * 7}**
+- Formatted date: **{new Date('2026-03-12').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}**
+
+These are evaluated at build time, so the output is static HTML — no JavaScript is shipped to the browser for these expressions.
+
+---
+
+## Inline JSX
+
+You can write raw HTML or JSX elements anywhere in the prose. This is useful for one-off styling that doesn't warrant a full component:
+
+<div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', margin: '1rem 0' }}>
+  <span style={{ background: '#5b21b6', color: '#fff', borderRadius: '9999px', padding: '0.25rem 0.75rem', fontSize: '0.85rem' }}>Astro</span>
+  <span style={{ background: '#7537e1', color: '#fff', borderRadius: '9999px', padding: '0.25rem 0.75rem', fontSize: '0.85rem' }}>React</span>
+  <span style={{ background: '#4c1d95', color: '#fff', borderRadius: '9999px', padding: '0.25rem 0.75rem', fontSize: '0.85rem' }}>MDX</span>
+  <span style={{ background: '#3730a3', color: '#fff', borderRadius: '9999px', padding: '0.25rem 0.75rem', fontSize: '0.85rem' }}>Tailwind</span>
+</div>
+
+---
+
+## Exported variables
+
+MDX files can export named values. These are accessible in Astro pages that render the collection entry via `const { Content, ...exports } = await entry.render()`.
+
+export const summary = 'MDX mixes Markdown and JSX for rich, component-driven content.';
+
+The exported `summary` above can be read programmatically by any page that renders this post.
+
+---
+
+## Mixing Markdown and JSX freely
+
+One of the most natural things about MDX is that you don't have to choose. A section can start as a Markdown heading, flow into a paragraph, drop into a component, return to a paragraph, and end with a code block — all in the same file.
+
+<Box className="mb-4 bg-purple-100 dark:bg-purple-950">
+
+### A note on hydration
+
+Components used in MDX content collections are **server-rendered by default**. If you need a component to be interactive in the browser, import it in the page's frontmatter (not the MDX file) and pass it in as a prop, or use Astro's `client:load` directive at the page level.
+
+</Box>
+
+For static, presentational components like `Box`, server rendering is all you need — and the result is zero JavaScript shipped to the browser for the component itself.
+
+---
+
+## When to use MDX vs Markdown
+
+| Use case | Recommendation |
+|---|---|
+| Long-form prose with standard formatting | `.md` — simpler, less overhead |
+| Post needs a custom component or layout element | `.mdx` — import what you need |
+| Computed values or dynamic expressions | `.mdx` |
+| Reusing a design pattern from the codebase | `.mdx` — import the existing component |
+| Guest post or external contribution | `.md` — lower barrier for contributors |
+
+Both formats live side by side in `src/content/blog/` and are handled identically by the content collection schema and all the site's utilities.

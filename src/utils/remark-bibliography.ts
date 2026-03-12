@@ -23,7 +23,7 @@ export function remarkBibliography() {
             // Detect bibliography section
             if (node.type === 'heading' && node.depth === 2) {
                 const headingText = (node.children[0] as Text)?.value;
-                if (headingText === 'Bibliografia') {
+                if (headingText === 'Bibliography') {
                     inBibliography = true;
                     return;
                 }
@@ -95,7 +95,7 @@ export function remarkBibliography() {
             // Detect bibliography section again
             if (node.type === 'heading' && node.depth === 2) {
                 const headingText = (node.children[0] as Text)?.value;
-                if (headingText === 'Bibliografia') {
+                if (headingText === 'Bibliography') {
                     inBibliography = true;
                     return;
                 }

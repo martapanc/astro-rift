@@ -1,12 +1,12 @@
 import type { CollectionEntry } from 'astro:content';
 
 /**
- * Strips the Bibliografia and Note sections from markdown content
- * These sections start with ## Bibliografia or ## Note and continue to the end
+ * Strips the Bibliography and Note sections from markdown content
+ * These sections start with ## Bibliography or ## Note and continue to the end
  */
 export function stripEndSections(content: string): string {
-    // Match ## Bibliografia or ## Note (case insensitive) and everything after
-    return content.replace(/^##\s+(Bibliografia|Note)\b[\s\S]*$/im, '').trim();
+    // Match ## Bibliography or ## Note (case insensitive) and everything after
+    return content.replace(/^##\s+(Bibliography|Note)\b[\s\S]*$/im, '').trim();
 }
 
 /**

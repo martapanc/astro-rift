@@ -5,7 +5,7 @@ export const SITE_DESCRIPTION_PLAIN = 'A Wordpress Theme re-engineered with Astr
 export const SITE_LANG = 'en';
 
 // Pagination
-export const PAGE_SIZE = 3;
+export const PAGE_SIZE = 4;
 
 export const email = 'test@email.com';
 
@@ -28,7 +28,7 @@ export const menu: MenuItem[] = [
         name: 'Categories',
         children: [
             { name: 'Welcome', url: '/category/welcome' },
-            { name: 'How To', url: '/category/how-to' },
+            { name: 'How-To', url: '/category/how-to' },
         ],
     }
 ];

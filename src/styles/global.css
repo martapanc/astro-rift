@@ -75,7 +75,7 @@
     --primary: #5b21b6;
     --secondary: #4c1d95;
 
-    --accent: #7c3aed;
+    --accent: #7537e1;
     --background: #faf7ff;
     --white: #fff;
     --black: #0f0a1f;
@@ -96,9 +96,9 @@
     --primary: #f59e0b;
     --secondary: #fbbf24;
 
-    --accent: #d97706;
-    --background: #130f20;
-    --white: #1e1830;
+    --accent: #ffbf04;
+    --background: #0d0a15;
+    --white: #151122;
     --black: #f5f0ff;
     --border: #2d2548;
     --text: #e8e0f5;
@@ -166,6 +166,10 @@ b {
     h5,
     h6 {
         @apply font-header mt-6 mb-2 font-extrabold text-gray-900 dark:text-gray-100;
+    }
+
+    h1 {
+        @apply text-5xl;
     }
 
     h2 {
@@ -240,10 +244,15 @@ code {
 pre {
     padding: 1.5em;
     border-radius: 8px;
+    margin-bottom: 1em;
 }
 
 pre > code {
     all: unset;
+}
+
+table {
+    @apply mb-6;
 }
 
 blockquote {

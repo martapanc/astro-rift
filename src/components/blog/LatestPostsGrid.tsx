@@ -19,7 +19,7 @@ export default function LatestPostsGrid({ posts }: Props) {
                 {posts.map((post) => (
                     <a
                         key={post.id}
-                        href={`/${post.id}`}
+                        href={`/posts/${post.id}`}
                         className="group relative block h-48 overflow-hidden rounded-lg"
                     >
                         {post.data.heroImage && (

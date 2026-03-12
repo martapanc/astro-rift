@@ -18,7 +18,7 @@ export const PostPreview = ({ post, optimizedImage }: PostPreviewProps) => {
     return (
         <div className="flex flex-col gap-x-7 gap-y-5 text-base lg:flex-row">
             <a
-                href={`/${id}`}
+                href={`/posts/${id}`}
                 className="relative aspect-[9/8] h-[300px] shrink-0 overflow-hidden rounded-lg"
                 aria-label={data.title}
             >
@@ -43,7 +43,7 @@ export const PostPreview = ({ post, optimizedImage }: PostPreviewProps) => {
                     >
                         {data.category}
                     </a>
-                    <a href={`/${id}`} className="hover:text-accent" aria-label={data.title}>
+                    <a href={`/posts/${id}`} className="hover:text-accent" aria-label={data.title}>
                         <h2 className="title font-header text-2xl font-semibold">{data.title}</h2>
                     </a>
                     <span className="mb-2 line-clamp-3 text-gray-600 dark:text-gray-400">

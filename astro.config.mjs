@@ -12,7 +12,6 @@ import rehypeBibliography from './src/plugins/rehype-bibliography.ts';
 import rehypeExternalLinks from './src/plugins/rehype-external-links.ts';
 import remarkGfm from 'remark-gfm';
 import pagefind from 'astro-pagefind';
-import sentry from '@sentry/astro';
 
 // https://astro.build/config
 export default defineConfig({
@@ -39,13 +38,6 @@ export default defineConfig({
             },
         }),
         pagefind(),
-        sentry({
-            sourceMapsUploadOptions: {
-                project: process.env.SENTRY_PROJECT,
-                org: process.env.SENTRY_ORG,
-                authToken: process.env.SENTRY_AUTH_TOKEN,
-            },
-        }),
     ],
     vite: {
         plugins: [tailwindcss()],

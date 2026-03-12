@@ -48,7 +48,7 @@ function PostList({
                     </div>
                 )}
             </div>
-            <div className="lg:w-[960px] lg:pe-8">
+            <div className="lg:w-240 lg:pe-8">
                 <section>
                     <div className="flex flex-col gap-10">
                         {sortedPosts.map(({ post, optimizedImage }, index) => (
