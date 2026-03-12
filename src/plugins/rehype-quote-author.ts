@@ -44,7 +44,7 @@ export default function rehypeQuoteAuthor() {
             // Create icon placeholder for Iconify
             const iconPlaceholder = h('span', {
                 class: 'iconify quote-icon',
-                'data-icon': 'fa7-solid:quote-left',
+                'data-icon': 'mdi:format-quote-open',
                 'data-width': '24',
                 'data-height': '24',
             });

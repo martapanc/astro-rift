@@ -30,6 +30,10 @@ export const menu: MenuItem[] = [
             { name: 'Welcome', url: '/category/welcome' },
             { name: 'How-To', url: '/category/how-to' },
         ],
+    },
+    {
+        name: 'Source Code',
+        url: 'https://github.com/martapanc/astro-rift',
     }
 ];
 
@@ -37,17 +41,22 @@ export const social = [
     {
         name: 'instagram',
         url: 'https://www.instagram.com',
-        icon: 'bi:instagram',
+        icon: 'mdi:instagram',
     },
     {
         name: 'threads',
         url: 'https://www.threads.com',
-        icon: 'bi:threads',
+        icon: 'mdi:at',
     },
     {
         name: 'facebook',
         url: 'https://www.facebook.com',
-        icon: 'bi:facebook',
+        icon: 'mdi:facebook',
+    },
+    {
+        name: 'X',
+        url: 'https://x.com',
+        icon: 'ph:x-logo',
     },
 ];
 

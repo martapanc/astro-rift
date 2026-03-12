@@ -31,10 +31,8 @@ export default defineConfig({
         react(),
         icon({
             include: {
-                mdi: ['chevron-down'],
-                'material-symbols': ['menu-rounded', 'close-rounded'],
-                bi: ['rss-fill', 'instagram', 'threads', 'facebook'],
-                'fa7-solid': ['ban'],
+                mdi: ['chevron-down', 'menu', 'close', 'rss', 'instagram', 'facebook', 'at', 'cancel'],
+                ph: ['x-logo'],
             },
         }),
         pagefind(),

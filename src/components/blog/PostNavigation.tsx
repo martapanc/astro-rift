@@ -16,10 +16,10 @@ export default function PostNavigation({ prev, next }: Props) {
                 {prev && (
                     <a
                         href={`/posts/${prev.id}`}
-                        className="group flex flex-col justify-between text-left transition-colors hover:text-[var(--primary)]"
+                        className="group flex flex-col justify-between text-left transition-colors hover:text-(--primary)"
                     >
                         <span className="mb-1.5 text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">
-                            Articolo precedente
+                            Previous article
                         </span>
                         <span className="text-base font-medium group-hover:underline lg:text-lg">
                             {prev.data.title}
@@ -32,10 +32,10 @@ export default function PostNavigation({ prev, next }: Props) {
                 {next && (
                     <a
                         href={`/posts/${next.id}`}
-                        className="group flex flex-col justify-between text-right transition-colors hover:text-[var(--primary)]"
+                        className="group flex flex-col justify-between text-right transition-colors hover:text-(--primary)"
                     >
                         <span className="mb-1.5 text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">
-                            Prossimo articolo
+                            Next article
                         </span>
                         <span className="text-base font-medium group-hover:underline lg:text-lg">
                             {next.data.title}

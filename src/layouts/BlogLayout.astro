@@ -122,7 +122,7 @@ const tags = Array.from(tagCounts.entries())
 
                 <!-- Sidebar -->
                 <div class="flex min-h-[40vh] flex-col gap-7 lg:flex-1 print:hidden">
-                    <SearchBox postUrls={allPosts.map((post) => `/${post.id}`)} />
+                    <SearchBox postUrls={allPosts.map((post) => `/posts/${post.id}`)} />
                     <Categories
                         categories={categories}
                         currentCategory={currentCategory}

@@ -1,6 +1,7 @@
 ---
 import { type CollectionEntry, getCollection, render } from 'astro:content';
-import PageLayout from '@/layouts/PageLayout.astro';
+import BlogLayout from '@/layouts/BlogLayout.astro';
+import { Box, BreadcrumbsBox } from '@/components/shared/Box.tsx';
 
 export const prerender = true;
 
@@ -17,11 +18,19 @@ type Props = CollectionEntry<'pages'>;
 const page = Astro.props;
 const { Content } = await render(page);
 const { title, description } = page.data;
+
+const breadcrumbs = [{ label: 'Homepage', href: '/' }, { label: title }];
 ---
 
-<PageLayout title={title} description={description ?? ''}>
-    <div slot="main-content" class="prose max-w-none">
-        <h1>{title}</h1>
-        <Content />
+<BlogLayout title={title} description={description ?? ''}>
+    <BreadcrumbsBox slot="header" client:load items={breadcrumbs} />
+
+    <div slot="main-content" class="xl:w-[1000px] 2xl:w-[1040px]">
+        <Box client:load>
+            <div class="prose max-w-none p-2 sm:p-3" data-pagefind-body>
+                <h1 data-pagefind-meta="title" class="font-header mb-6 text-3xl font-semibold text-black md:text-4xl dark:text-white">{title}</h1>
+                <Content />
+            </div>
+        </Box>
     </div>
-</PageLayout>
+</BlogLayout>

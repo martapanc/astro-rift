@@ -32,7 +32,7 @@ function PostHeader({ post, readingMinutes }: PostHeaderProps) {
                         className="hover:text-accent flex items-center gap-1.5"
                     >
                         <Icon
-                            icon="material-symbols:calendar-month-rounded"
+                            icon="mdi:calendar-month"
                             width="20"
                             height="20"
                         />
@@ -45,7 +45,7 @@ function PostHeader({ post, readingMinutes }: PostHeaderProps) {
                 <div className="flex items-center gap-1">
                     <Icon icon="mdi:clock-time-four" width="20" height="20" />
 
-                    <span className="pt-0">Tempo di lettura: {readingMinutes} minuti</span>
+                    <span className="pt-0">Reading time: {readingMinutes} minutes</span>
                 </div>
 
                 {tags && tags?.length > 0 && (

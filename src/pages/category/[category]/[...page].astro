@@ -35,7 +35,7 @@ const allPosts = await getBlogPosts();
 const allCategoryPosts = getPostsByCategory(allPosts, category);
 
 const title = `${categoryDisplay} - ${SITE_TITLE}`;
-const description = `Articoli nella categoria ${categoryDisplay}`;
+const description = `Articles in the category ${categoryDisplay}`;
 
 const postsWithImages = await getPostsWithOptimizedImages(page.data);
 ---

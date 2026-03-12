@@ -1,5 +1,5 @@
 ---
-import { SITE_TITLE, SITE_DESCRIPTION, social, menu } from '@/consts.ts';
+import { SITE_DESCRIPTION, social, menu } from '@/consts.ts';
 import type { MenuItem } from '@/consts.ts';
 import HeaderLink from './HeaderLink.astro';
 import DarkModeToggle from './DarkModeToggle.astro';
@@ -31,12 +31,12 @@ const isDropdownActive = (item: MenuItem) => {
                 >
                     <Icon
                         id="menu-icon"
-                        name="material-symbols:menu-rounded"
+                        name="mdi:menu"
                         class="icon-hamburger absolute inset-0 h-10 w-10 transition-opacity duration-300"
                     />
                     <Icon
                         id="close-icon"
-                        name="material-symbols:close-rounded"
+                        name="mdi:close"
                         class="icon-close absolute inset-0 h-10 w-10 opacity-0 transition-opacity duration-300"
                     />
                 </button>

@@ -34,7 +34,7 @@ const allPosts = await getBlogPosts();
 const allYearPosts = getPostsByYear(allPosts, year);
 
 const title = `${year} - ${SITE_TITLE}`;
-const description = `Articoli pubblicati nel ${year}`;
+const description = `Articles published in ${year}`;
 
 const breadcrumbs = [{ label: 'Homepage', href: '/' }, { label: String(year) }];
 
@@ -51,7 +51,7 @@ const postsWithImages = await getPostsWithOptimizedImages(page.data);
                 <h1 class="font-header text-3xl font-bold">{year}</h1>
                 <span class="text-sm text-gray-600 dark:text-gray-200">
                     {allYearPosts.length}{' '}
-                    {allYearPosts.length === 1 ? 'articolo' : 'articoli'}
+                    {allYearPosts.length === 1 ? 'article' : 'articles'}
                 </span>
             </div>
             <Breadcrumbs items={breadcrumbs} client:load />

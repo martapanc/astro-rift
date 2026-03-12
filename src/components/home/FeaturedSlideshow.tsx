@@ -24,14 +24,14 @@ interface SlideProps {
 function Slide({ post, optimizedImage, excerpt, className, isFadingOut }: SlideProps) {
     return (
         <a
-            href={`/${post.id}`}
+            href={`/posts/${post.id}`}
             className={clsx('absolute inset-0', className, isFadingOut ? 'z-10' : 'group')}
             style={isFadingOut ? { pointerEvents: 'none' } : undefined}
         >
             {/* Mobile Layout: Image on top, content below */}
             <div className="flex h-full flex-col sm:hidden">
                 {/* Image section - fixed height */}
-                <div className="relative h-48 w-full flex-shrink-0 overflow-hidden">
+                <div className="relative h-48 w-full shrink-0 overflow-hidden">
                     {optimizedImage && (
                         <img
                             src={optimizedImage.src}
@@ -49,14 +49,14 @@ function Slide({ post, optimizedImage, excerpt, className, isFadingOut }: SlideP
                 </div>
 
                 {/* Content section - fixed height */}
-                <div className="bg-background2 flex h-52 flex-shrink-0 flex-col px-4 py-6">
-                    <div className="mb-2 inline-block w-fit rounded bg-[var(--primary)] px-3 py-1 text-sm font-medium text-white">
+                <div className="bg-background2 flex h-52 shrink-0 flex-col px-4 py-6">
+                    <div className="mb-2 inline-block w-fit rounded bg-(--primary) px-3 py-1 text-sm font-medium text-white">
                         {post.data.category}
                     </div>
                     <h2 className="font-header mb-2 line-clamp-2 text-2xl leading-6 font-bold text-gray-900 dark:text-white">
                         {post.data.title}
                     </h2>
-                    <p className="!mb-0 line-clamp-3 text-sm text-gray-700 dark:text-gray-300">
+                    <p className="mb-0! line-clamp-3 text-sm text-gray-700 dark:text-gray-300">
                         {excerpt}
                     </p>
                 </div>
@@ -78,16 +78,16 @@ function Slide({ post, optimizedImage, excerpt, className, isFadingOut }: SlideP
                         loading={isFadingOut ? 'lazy' : 'eager'}
                     />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent" />
                 <div className="absolute right-0 bottom-0 left-0 p-6 pb-10 md:p-10">
                     <div className="rounded-lg bg-black/30 p-4 backdrop-blur-md">
-                        <div className="mx-2 mb-2 inline-block rounded bg-[var(--primary)] px-3 py-1 text-sm font-medium text-white">
+                        <div className="mx-2 mb-2 inline-block rounded bg-(--primary) px-3 py-1 text-sm font-medium text-white">
                             {post.data.category}
                         </div>
                         <h2 className="font-header mb-1 w-fit rounded-md px-2 text-3xl font-bold text-white md:text-[42px]">
                             {post.data.title}
                         </h2>
-                        <p className="!mb-0 line-clamp-2 w-fit rounded-md px-2 text-sm text-gray-200 md:line-clamp-3 md:text-base lg:text-lg">
+                        <p className="mb-0! line-clamp-2 w-fit rounded-md px-2 text-sm text-gray-200 md:line-clamp-3 md:text-base lg:text-lg">
                             {excerpt}
                         </p>
                     </div>

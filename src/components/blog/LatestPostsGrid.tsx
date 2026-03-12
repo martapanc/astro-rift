@@ -13,7 +13,7 @@ export default function LatestPostsGrid({ posts }: Props) {
     return (
         <Box className="mt-5 p-5 lg:mt-7">
             <h3 className="font-header text-text wp-block-heading mb-6 text-3xl font-semibold">
-                Ultimi articoli
+                Latest articles
             </h3>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                 {posts.map((post) => (
@@ -30,7 +30,7 @@ export default function LatestPostsGrid({ posts }: Props) {
                                 }}
                             />
                         )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/35 to-transparent" />
+                        <div className="absolute inset-0 bg-linear-to-t from-black/95 via-black/35 to-transparent" />
                         <div className="absolute right-0 bottom-0 left-0 p-4">
                             <h4 className="font-header line-clamp-2 text-2xl font-semibold text-white">
                                 {post.data.title}

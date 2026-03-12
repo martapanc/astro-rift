@@ -1,6 +1,6 @@
 import type { CollectionEntry } from 'astro:content';
 import { format, getYear, getMonth, isSameMonth, isSameYear } from 'date-fns';
-import { it } from 'date-fns/locale';
+import { enGB } from 'date-fns/locale';
 
 /**
  * Format a date to YYYY/MM path format
@@ -52,11 +52,11 @@ export function getPostsByMonth(
 }
 
 /**
- * Get the formatted month name in Italian
+ * Get the formatted month name the chosen locale
  */
 export function getMonthName(month: number): string {
     const date = new Date(2000, month - 1, 1);
-    return format(date, 'MMMM', { locale: it });
+    return format(date, 'MMMM', { locale: enGB });
 }
 
 /**

@@ -39,24 +39,24 @@ export function SocialShare({ url, title }: SocialShareProps) {
     return (
         <div className="my-8 flex flex-col rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-800 dark:bg-[#201e27]">
             <h3 className="mb-3 text-sm font-semibold text-gray-700 dark:text-gray-300">
-                Condividi articolo
+                Share article
             </h3>
             <div className="flex flex-wrap gap-2">
                 {/* Copy Link */}
                 <button
                     onClick={handleCopy}
                     className="flex items-center gap-2 rounded-md bg-gray-200 px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-300 sm:w-24 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
-                    title="Copia link"
+                    title="Copy link"
                 >
                     <Icon icon={copied ? 'mdi:check' : 'mdi:content-copy'} width="20" height="20" />
-                    <span className="hidden sm:inline">{copied ? 'Copiato!' : 'Copia'}</span>
+                    <span className="hidden sm:inline">{copied ? 'Copied!' : 'Copy'}</span>
                 </button>
 
                 {/* Email */}
                 <a
                     href={shareUrls.email}
                     className="flex items-center gap-2 rounded-md bg-gray-600 px-3 py-2 text-sm font-medium text-white! transition-colors hover:bg-gray-700 hover:text-white!"
-                    title="Condividi via email"
+                    title="Share via email"
                 >
                     <Icon icon="mdi:email" width="20" height="20" />
                     <span className="hidden sm:inline">Email</span>
@@ -68,7 +68,7 @@ export function SocialShare({ url, title }: SocialShareProps) {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 rounded-md bg-[#1877F2] px-3 py-2 text-sm font-medium text-white! transition-colors hover:bg-[#166FE5] hover:text-white!"
-                    title="Condividi su Facebook"
+                    title="Share on Facebook"
                 >
                     <Icon icon="mdi:facebook" width="20" height="20" />
                     <span className="hidden sm:inline">Facebook</span>
@@ -79,8 +79,8 @@ export function SocialShare({ url, title }: SocialShareProps) {
                     href={shareUrls.x}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 rounded-md bg-black px-3 py-2 text-sm font-medium !text-white transition-colors hover:bg-gray-800 hover:!text-white"
-                    title="Condividi su X"
+                    className="flex items-center gap-2 rounded-md bg-black px-3 py-2 text-sm font-medium text-white! transition-colors hover:bg-gray-800 hover:text-white!"
+                    title="Share on X"
                 >
                     <Icon icon="ph:x-logo" width="20" height="20" />
                 </a>
@@ -90,8 +90,8 @@ export function SocialShare({ url, title }: SocialShareProps) {
                     href={shareUrls.reddit}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 rounded-md bg-[#FF4500] px-3 py-2 text-sm font-medium !text-white transition-colors hover:bg-[#E63E00] hover:!text-white"
-                    title="Condividi su Reddit"
+                    className="flex items-center gap-2 rounded-md bg-[#FF4500] px-3 py-2 text-sm font-medium text-white! transition-colors hover:bg-[#E63E00] hover:text-white!"
+                    title="Share on Reddit"
                 >
                     <Icon icon="mdi:reddit" width="20" height="20" />
                     <span className="hidden sm:inline">Reddit</span>
@@ -102,8 +102,8 @@ export function SocialShare({ url, title }: SocialShareProps) {
                     href={shareUrls.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 rounded-md bg-[#0A66C2] px-3 py-2 text-sm font-medium !text-white transition-colors hover:bg-[#095196] hover:!text-white"
-                    title="Condividi su LinkedIn"
+                    className="flex items-center gap-2 rounded-md bg-[#0A66C2] px-3 py-2 text-sm font-medium text-white! transition-colors hover:bg-[#095196] hover:text-white!"
+                    title="Share on LinkedIn"
                 >
                     <Icon icon="mdi:linkedin" width="20" height="20" />
                     <span className="hidden sm:inline">LinkedIn</span>
@@ -114,8 +114,8 @@ export function SocialShare({ url, title }: SocialShareProps) {
                     href={shareUrls.telegram}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 rounded-md bg-[#26A5E4] px-3 py-2 text-sm font-medium !text-white transition-colors hover:bg-[#2095D3] hover:!text-white"
-                    title="Condividi su Telegram"
+                    className="flex items-center gap-2 rounded-md bg-[#26A5E4] px-3 py-2 text-sm font-medium text-white! transition-colors hover:bg-[#2095D3] hover:text-white!"
+                    title="Share on Telegram"
                 >
                     <Icon icon="mdi:telegram" width="20" height="20" />
                     <span className="hidden sm:inline">Telegram</span>
@@ -126,8 +126,8 @@ export function SocialShare({ url, title }: SocialShareProps) {
                     href={shareUrls.whatsapp}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 rounded-md bg-[#25D366] px-3 py-2 text-sm font-medium !text-white transition-colors hover:bg-[#20BD5A] hover:!text-white"
-                    title="Condividi su WhatsApp"
+                    className="flex items-center gap-2 rounded-md bg-[#25D366] px-3 py-2 text-sm font-medium text-white! transition-colors hover:bg-[#20BD5A] hover:text-white!"
+                    title="Share on WhatsApp"
                 >
                     <Icon icon="mdi:whatsapp" width="20" height="20" />
                     <span className="hidden sm:inline">WhatsApp</span>
@@ -137,10 +137,10 @@ export function SocialShare({ url, title }: SocialShareProps) {
                 <button
                     onClick={handlePrint}
                     className="flex cursor-pointer items-center gap-2 rounded-md bg-gray-200 px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
-                    title="Stampa"
+                    title="Print"
                 >
                     <Icon icon="mdi:printer" width="20" height="20" />
-                    <span className="hidden sm:inline">Stampa</span>
+                    <span className="hidden sm:inline">Print</span>
                 </button>
             </div>
         </div>

@@ -30,8 +30,8 @@ export default function BackToTop() {
         <button
             onClick={scrollToTop}
             className={clsx(
-                'fixed right-6 bottom-6 z-[1000] flex h-10 w-10 cursor-pointer',
-                'items-center justify-center rounded-full bg-[var(--primary)] text-white shadow-md',
+                'fixed right-6 bottom-6 z-1000 flex h-10 w-10 cursor-pointer',
+                'items-center justify-center rounded-full bg-(--primary) text-white shadow-md',
                 'transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg active:translate-y-0',
                 'md:right-8 md:bottom-8 md:h-12 md:w-12',
                 isVisible ? 'visible opacity-100' : 'invisible opacity-0',

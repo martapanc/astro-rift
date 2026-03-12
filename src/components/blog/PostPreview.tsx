@@ -56,7 +56,7 @@ export const PostPreview = ({ post, optimizedImage }: PostPreviewProps) => {
                             aria-label="mese"
                         >
                             <Icon
-                                icon="material-symbols:calendar-month-rounded"
+                                icon="mdi:calendar-month"
                                 width="20"
                                 height="20"
                             />

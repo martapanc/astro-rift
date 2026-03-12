@@ -53,7 +53,7 @@ export function CategoryBox({ category, postsLength }: { category: string; posts
                 <div className="flex flex-col text-center sm:text-start">
                     <h1 className="font-header text-3xl font-bold">{category}</h1>
                     <span className="text-sm text-gray-600 dark:text-gray-400">
-                        {postsLength} {postsLength === 1 ? 'articolo' : 'articoli'}
+                        {postsLength} {postsLength === 1 ? 'article' : 'articles'}
                     </span>
                 </div>
                 <Breadcrumbs items={breadcrumbs} />
@@ -71,7 +71,7 @@ export function TagBox({ tag, postsLength }: { tag: string; postsLength: number 
                 <div className="flex flex-col text-center sm:text-start">
                     <h1 className="font-header text-3xl font-bold">#{tag}</h1>
                     <span className="text-sm text-gray-600 dark:text-gray-400">
-                        {postsLength} {postsLength === 1 ? 'articolo' : 'articoli'}
+                        {postsLength} {postsLength === 1 ? 'article' : 'articles'}
                     </span>
                 </div>
                 <Breadcrumbs items={breadcrumbs} />

@@ -11,11 +11,11 @@ type LatestArticlesProps = {
 
 function LatestArticles({ articles }: LatestArticlesProps) {
     return (
-        <SidebarBox title="Articoli Recenti">
+        <SidebarBox title="Latest Articles">
             <ul className="flex flex-col">
                 {articles.map((article, index) => (
                     <ListItem key={article.id} last={index === articles.length - 1}>
-                        <a href={`/${article.id}`} className="hover:text-accent leading-[22px]">
+                        <a href={`/${article.id}`} className="hover:text-accent leading-5.5">
                             {article.title}
                         </a>
                     </ListItem>
