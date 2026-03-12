@@ -22,23 +22,23 @@ A WordPress-inspired blog theme re-engineered with Astro 5 & React — fast, ful
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Framework | Astro 5 |
-| UI | React 19 |
-| Styling | Tailwind CSS 4 |
-| Markdown | MDX, remark-gfm |
-| Search | Pagefind |
-| Forms | Formik + Yup |
-| Email | Resend |
-| Analytics | Cloudflare Web Analytics |
-| Error tracking | Sentry |
-| Deployment | Vercel |
+| Layer          | Technology               |
+|----------------|--------------------------|
+| Framework      | Astro 5                  |
+| UI             | React 19                 |
+| Styling        | Tailwind CSS 4           |
+| Markdown       | MDX, remark-gfm          |
+| Search         | Pagefind                 |
+| Forms          | Formik + Yup             |
+| Email          | Resend                   |
+| Analytics      | Cloudflare Web Analytics |
+| Error tracking | Sentry                   |
+| Deployment     | Vercel                   |
 
 ## Getting Started
 
 ```sh
-# Clone the repo
+# Fork & Clone the repo
 git clone https://github.com/your-username/astro-rift.git
 cd astro-rift
 
@@ -81,15 +81,15 @@ Copy `.env.example` to `.env` and fill in the values you need:
 cp .env.example .env
 ```
 
-| Variable | Purpose |
-|---|---|
-| `RESEND_API_KEY` | Contact form email delivery |
-| `RESEND_FROM_EMAIL` | Sender address (must be verified in Resend) |
-| `RESEND_TO_EMAIL` | Where contact form submissions are sent |
-| `PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN` | Cloudflare Web Analytics beacon |
-| `PUBLIC_SENTRY_DSN` | Sentry client-side error tracking |
-| `SENTRY_PROJECT` | Sentry project name |
-| `SENTRY_AUTH_TOKEN` | Sentry source map upload token |
+| Variable                            | Purpose                                     |
+|-------------------------------------|---------------------------------------------|
+| `RESEND_API_KEY`                    | Contact form email delivery                 |
+| `RESEND_FROM_EMAIL`                 | Sender address (must be verified in Resend) |
+| `RESEND_TO_EMAIL`                   | Where contact form submissions are sent     |
+| `PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN` | Cloudflare Web Analytics beacon             |
+| `PUBLIC_SENTRY_DSN`                 | Sentry client-side error tracking           |
+| `SENTRY_PROJECT`                    | Sentry project name                         |
+| `SENTRY_AUTH_TOKEN`                 | Sentry source map upload token              |
 
 All variables are optional — features degrade gracefully when keys are absent.
 
@@ -114,18 +114,18 @@ Your post content here...
 
 ### Frontmatter reference
 
-| Field | Type | Required | Notes |
-|---|---|---|---|
-| `title` | string | yes | |
-| `category` | string | yes | Used for grouping and navigation |
-| `pubDate` | date | yes | |
-| `tags` | string or string[] | no | Comma-separated string or array |
-| `heroImage` | image | no | Use `@/assets/...` path |
-| `excerpt` | string | no | Auto-generated from first 30 words if omitted |
-| `updatedDate` | date | no | Shown alongside publish date |
-| `draft` | boolean | no | Defaults to `false`; drafts hidden in production |
-| `featured` | boolean | no | Includes post in home page slideshow |
-| `featuredRank` | number | no | Controls order in the featured slideshow |
+| Field          | Type               | Required | Notes                                            |
+|----------------|--------------------|----------|--------------------------------------------------|
+| `title`        | string             | yes      |                                                  |
+| `category`     | string             | yes      | Used for grouping and navigation                 |
+| `pubDate`      | date               | yes      |                                                  |
+| `tags`         | string or string[] | no       | Comma-separated string or array                  |
+| `heroImage`    | image              | no       | Use `@/assets/...` path                          |
+| `excerpt`      | string             | no       | Auto-generated from first 30 words if omitted    |
+| `updatedDate`  | date               | no       | Shown alongside publish date                     |
+| `draft`        | boolean            | no       | Defaults to `false`; drafts hidden in production |
+| `featured`     | boolean            | no       | Includes post in home page slideshow             |
+| `featuredRank` | number             | no       | Controls order in the featured slideshow         |
 
 ## Project Structure
 
@@ -154,16 +154,16 @@ src/
 
 ## Commands
 
-| Command | Action |
-|---|---|
-| `yarn dev` | Start dev server at `localhost:4321` |
-| `yarn build` | Build production site to `./dist/` |
-| `yarn preview` | Preview the production build locally |
-| `yarn lint` | Run ESLint |
-| `yarn lint:fix` | Run ESLint with auto-fix |
-| `yarn format` | Format all files with Prettier |
-| `yarn type-check` | Run Astro type checker |
-| `yarn test:e2e` | Run Playwright end-to-end tests |
+| Command           | Action                               |
+|-------------------|--------------------------------------|
+| `yarn dev`        | Start dev server at `localhost:4321` |
+| `yarn build`      | Build production site to `./dist/`   |
+| `yarn preview`    | Preview the production build locally |
+| `yarn lint`       | Run ESLint                           |
+| `yarn lint:fix`   | Run ESLint with auto-fix             |
+| `yarn format`     | Format all files with Prettier       |
+| `yarn type-check` | Run Astro type checker               |
+| `yarn test:e2e`   | Run Playwright end-to-end tests      |
 
 ## Deployment
 
@@ -175,9 +175,9 @@ For other platforms, swap the adapter in `astro.config.mjs`. See the [Astro depl
 
 The theme uses CSS custom properties mapped into Tailwind via `@theme`. Edit `src/styles/global.css` to change the palette.
 
-| Variable | Light | Dark |
-|---|---|---|
-| `--primary` | `#5b21b6` (purple) | `#f59e0b` (amber) |
-| `--accent` | `#7537e1` | `#ffbf04` |
-| `--background` | `#faf7ff` | `#0d0a15` |
-| `--text` | `#4a3f5c` | `#e8e0f5` |
+| Variable       | Light              | Dark              |
+|----------------|--------------------|-------------------|
+| `--primary`    | `#5b21b6` (purple) | `#f59e0b` (amber) |
+| `--accent`     | `#7537e1`          | `#ffbf04`         |
+| `--background` | `#faf7ff`          | `#0d0a15`         |
+| `--text`       | `#4a3f5c`          | `#e8e0f5`         |

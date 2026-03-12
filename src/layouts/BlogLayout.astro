@@ -13,8 +13,6 @@ import Tags from '@/components/sidebar/Tags.tsx';
 import SearchBox from '@/components/sidebar/SearchBox.astro';
 import { getUniqueCategories } from '@/utils/categories';
 import { getUniqueMonths } from '@/utils/archives';
-import CookieConsent from '@/components/CookieConsent.astro';
-import { cookieBannerEnabled } from '@/consts.ts';
 
 interface Props {
     title: string;
@@ -144,7 +142,6 @@ const tags = Array.from(tagCounts.entries())
             </div>
         </div>
         <Footer />
-        {cookieBannerEnabled && <CookieConsent />}
         <BackToTop client:load />
     </body>
 </html>

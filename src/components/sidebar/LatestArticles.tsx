@@ -15,7 +15,7 @@ function LatestArticles({ articles }: LatestArticlesProps) {
             <ul className="flex flex-col">
                 {articles.map((article, index) => (
                     <ListItem key={article.id} last={index === articles.length - 1}>
-                        <a href={`/${article.id}`} className="hover:text-accent leading-5.5">
+                        <a href={`/posts/${article.id}`} className="hover:text-accent leading-5.5">
                             {article.title}
                         </a>
                     </ListItem>

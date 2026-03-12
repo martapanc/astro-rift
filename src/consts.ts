@@ -59,5 +59,3 @@ export const social = [
         icon: 'ph:x-logo',
     },
 ];
-
-export const cookieBannerEnabled = false;

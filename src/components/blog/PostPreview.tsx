@@ -53,7 +53,7 @@ export const PostPreview = ({ post, optimizedImage }: PostPreviewProps) => {
                         <a
                             href={monthArchiveUrl}
                             className="hover:text-accent flex items-center gap-1.5"
-                            aria-label="mese"
+                            aria-label="month"
                         >
                             <Icon
                                 icon="mdi:calendar-month"

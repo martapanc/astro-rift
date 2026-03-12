@@ -42,7 +42,7 @@ function PostList({
                                 }
                                 className="h-4 w-4"
                             />
-                            {ascending ? 'Meno recenti' : 'Più recenti'}
+                            {ascending ? 'Oldest first' : 'Newest first'}
                         </button>
                     </div>
                 )}
