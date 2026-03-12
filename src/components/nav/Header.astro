@@ -68,7 +68,7 @@ const isDropdownActive = (item: MenuItem) => {
         </div>
 
         <div
-            class="internal-links bg-background2 border-border hidden w-full flex-row items-center justify-center gap-1 border-x-0 border-y-[1px] border-solid pt-2 shadow-md lg:flex"
+            class="internal-links bg-background2 border-border hidden w-full flex-row items-center justify-center gap-1 border-x-0 border-y border-solid pt-2 shadow-md lg:flex"
         >
             {
                 menu.map((item) =>
@@ -76,7 +76,7 @@ const isDropdownActive = (item: MenuItem) => {
                         <div class="dropdown-container group relative" data-desktop-dropdown>
                             <button
                                 class:list={[
-                                    'dropdown-trigger flex cursor-pointer items-center gap-1 border-b-4 bg-transparent px-[15px] py-2 text-[22px] font-semibold no-underline transition-colors duration-200',
+                                    'dropdown-trigger flex cursor-pointer items-center gap-1 border-b-4 bg-transparent px-3.75 py-2 text-[18px] font-semibold no-underline transition-colors duration-200',
                                     isDropdownActive(item)
                                         ? 'border-primary'
                                         : 'border-transparent',
@@ -91,17 +91,17 @@ const isDropdownActive = (item: MenuItem) => {
                                     class="h-5 w-5 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180"
                                 />
                             </button>
-                            <div class="dropdown-menu bg-background2 invisible absolute top-full left-1/2 z-50 mt-1 min-w-[200px] -translate-x-1/2 rounded-md py-1 opacity-0 shadow-lg transition-all duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                            <div class="dropdown-menu bg-background2 invisible absolute top-full left-1/2 z-50 mt-1 min-w-50 -translate-x-1/2 rounded-md py-1 opacity-0 shadow-lg transition-all duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
                                 {item.children.map((child) =>
                                     child.url ? (
                                         <HeaderLink
                                             href={child.url}
-                                            class="dropdown-item block w-full !border-b-0 !px-5 !py-3 !text-lg whitespace-nowrap hover:bg-slate-100 dark:hover:bg-neutral-800"
+                                            class="dropdown-item block w-full border-b-0! px-5! py-3! text-base! whitespace-nowrap hover:bg-gray-200 dark:hover:bg-[#2b2739]"
                                         >
                                             {child.name}
                                         </HeaderLink>
                                     ) : (
-                                        <a class="dropdown-item block w-full !border-b-0 !px-5 !py-3 !text-lg whitespace-nowrap">
+                                        <a class="dropdown-item block w-full border-b-0! px-5! py-3! text-base! whitespace-nowrap">
                                             {child.name}
                                         </a>
                                     ),
@@ -140,7 +140,7 @@ const isDropdownActive = (item: MenuItem) => {
                                     {item.children.map((child) => (
                                         <li>
                                             <a
-                                                class="nav-link submenu-link bg-secondary hover:bg-accent block !py-3.5 !pl-9 text-base"
+                                                class="nav-link submenu-link bg-secondary hover:bg-accent block py-3.5! pl-9! text-base"
                                                 title={child.name}
                                                 href={child.url}
                                             >
@@ -289,7 +289,7 @@ const isDropdownActive = (item: MenuItem) => {
         border-bottom: 4px solid transparent;
         text-decoration: none;
         font-family: var(--font-header), serif;
-        font-size: 22px;
+        font-size: 18px;
         font-weight: 600;
     }
 
@@ -334,7 +334,7 @@ const isDropdownActive = (item: MenuItem) => {
 
         &.show {
             max-height: 500px;
-            @apply border-border border-x-0 border-b-[1px] border-solid shadow-md;
+            @apply border-border border-x-0 border-b border-solid shadow-md;
         }
 
         .menu-item {
@@ -342,7 +342,7 @@ const isDropdownActive = (item: MenuItem) => {
         }
 
         .nav-link {
-            @apply bg-primary hover:bg-secondary block !text-white no-underline;
+            @apply bg-primary hover:bg-secondary block text-white! no-underline;
 
             padding: 1rem 1.5rem;
             color: rgb(var(--white));
@@ -382,7 +382,7 @@ const isDropdownActive = (item: MenuItem) => {
             }
 
             .mobile-dropdown-menu {
-                @apply max-h-[500px];
+                @apply max-h-125;
             }
         }
     }

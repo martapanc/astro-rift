@@ -16,7 +16,7 @@ import pagefind from 'astro-pagefind';
 // https://astro.build/config
 export default defineConfig({
     site: 'https://sample-site.com',
-    output: 'server',
+    output: 'static',
     adapter: vercel({
         edgeMiddleware: false,
         imageService: true,

@@ -29,6 +29,7 @@
         "@fontsource-variable/markazi-text": "^5.2.9",
         "@fontsource-variable/quicksand": "^5.2.10",
         "@fontsource/dm-serif-text": "^5.2.8",
+        "@fontsource/josefin-sans": "^5.2.8",
         "@fontsource/rubik": "^5.2.8",
         "@headlessui/react": "^2.2.9",
         "@iconify-json/bi": "^1.2.7",

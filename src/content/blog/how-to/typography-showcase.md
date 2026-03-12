@@ -1,7 +1,7 @@
 ---
 title: Typography Showcase
 category: How-To
-pubDate: 2026-03-12
+pubDate: 2026-03-11
 tags: typography, markdown, reference
 heroImage: '@/assets/fallback-image.jpg'
 excerpt: A reference post demonstrating every typographic element available in AstroRift — headings, lists, code, quotes, tables, footnotes, bibliography, and more.

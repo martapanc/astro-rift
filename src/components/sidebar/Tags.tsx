@@ -39,7 +39,7 @@ function Tags({ tags, maxTags = 25, minFontSize = 12, maxFontSize = 20 }: TagsPr
                         <a
                             key={tag.name}
                             href={`/tag/${tag.name.toLowerCase()}`}
-                            className="hover:text-accent inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-2 py-0.5 transition-colors dark:bg-neutral-800"
+                            className="hover:text-accent inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-2 py-0.5 transition-colors dark:bg-gray-800"
                             style={{ fontSize: `${fontSize}px` }}
                             title={`${tag.name} (${tag.count})`}
                         >

@@ -37,7 +37,7 @@ export function SocialShare({ url, title }: SocialShareProps) {
     };
 
     return (
-        <div className="my-8 flex flex-col rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800">
+        <div className="my-8 flex flex-col rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-800 dark:bg-[#201e27]">
             <h3 className="mb-3 text-sm font-semibold text-gray-700 dark:text-gray-300">
                 Condividi articolo
             </h3>
@@ -55,7 +55,7 @@ export function SocialShare({ url, title }: SocialShareProps) {
                 {/* Email */}
                 <a
                     href={shareUrls.email}
-                    className="flex items-center gap-2 rounded-md bg-gray-600 px-3 py-2 text-sm font-medium !text-white transition-colors hover:bg-gray-700 hover:!text-white"
+                    className="flex items-center gap-2 rounded-md bg-gray-600 px-3 py-2 text-sm font-medium text-white! transition-colors hover:bg-gray-700 hover:text-white!"
                     title="Condividi via email"
                 >
                     <Icon icon="mdi:email" width="20" height="20" />
@@ -67,7 +67,7 @@ export function SocialShare({ url, title }: SocialShareProps) {
                     href={shareUrls.facebook}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 rounded-md bg-[#1877F2] px-3 py-2 text-sm font-medium !text-white transition-colors hover:bg-[#166FE5] hover:!text-white"
+                    className="flex items-center gap-2 rounded-md bg-[#1877F2] px-3 py-2 text-sm font-medium text-white! transition-colors hover:bg-[#166FE5] hover:text-white!"
                     title="Condividi su Facebook"
                 >
                     <Icon icon="mdi:facebook" width="20" height="20" />

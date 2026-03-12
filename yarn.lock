@@ -1276,6 +1276,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource/josefin-sans@npm:^5.2.8":
+  version: 5.2.8
+  resolution: "@fontsource/josefin-sans@npm:5.2.8"
+  checksum: 10c0/e9a0c642309ca82d9cc648fed2e377c0cde978e6855cad4fafc5be9c1e94e40bf3a1962e4f625c3fff80ae13be94ab1a2096876f16900af5546ee209499ab6a9
+  languageName: node
+  linkType: hard
+
 "@fontsource/rubik@npm:^5.2.8":
   version: 5.2.8
   resolution: "@fontsource/rubik@npm:5.2.8"
@@ -4620,6 +4627,7 @@ __metadata:
     "@fontsource-variable/markazi-text": "npm:^5.2.9"
     "@fontsource-variable/quicksand": "npm:^5.2.10"
     "@fontsource/dm-serif-text": "npm:^5.2.8"
+    "@fontsource/josefin-sans": "npm:^5.2.8"
     "@fontsource/rubik": "npm:^5.2.8"
     "@headlessui/react": "npm:^2.2.9"
     "@iconify-json/bi": "npm:^1.2.7"

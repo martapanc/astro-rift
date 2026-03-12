@@ -39,4 +39,4 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
 > The scariest moment is always just before you start.
 > --- Stephen King, *On Writing* (2000)
 
-Happy writing.
+Happy writing! 😀

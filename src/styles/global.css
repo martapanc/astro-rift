@@ -10,9 +10,17 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @font-face {
-    font-family: 'DM Serif Text';
-    src: url('/fonts/DMSerifText.woff2') format('woff2');
+    font-family: 'Josefin Sans';
+    src: url('/fonts/Josefin-sans-regular.woff2') format('woff2');
     font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Josefin Sans';
+    src: url('/fonts/Josefin-sans-bold.woff2') format('woff2');
+    font-weight: 700 900;
     font-style: normal;
     font-display: swap;
 }
@@ -33,9 +41,17 @@
     font-display: swap;
 }
 @font-face {
-    font-family: 'Rubik';
-    src: url('/fonts/rubik-400.woff') format('woff');
+    font-family: 'Atkinson Hyperlegibility';
+    src: url('/fonts/atkinson-regular.woff') format('woff');
     font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Atkinson Hyperlegibility';
+    src: url('/fonts/atkinson-bold.woff') format('woff');
+    font-weight: 700;
     font-style: normal;
     font-display: swap;
 }
@@ -51,8 +67,8 @@
     --color-text: var(--text);
 
     /* Custom fonts */
-    --font-title: 'DM Serif Text', Georgia, serif;
-    --font-header: 'Markazi Text Variable', Georgia, serif;
+    --font-title: 'Markazi Text Variable', Georgia, serif;
+    --font-header: 'Josefin Sans', Georgia, serif;
     --font-quote: 'Quicksand', Arial, sans-serif;
 }
 
@@ -112,7 +128,7 @@
 }
 
 body {
-    font-family: 'Rubik', Arial, sans-serif;
+    font-family: 'Atkinson Hyperlegibility', Arial, sans-serif;
     font-weight: 400;
     text-align: left;
     background: var(--background);
@@ -256,11 +272,11 @@ table {
 }
 
 blockquote {
-    @apply font-quote mb-5 flex flex-col gap-x-5 gap-y-3 rounded-lg border-s border-l-4 border-solid bg-[#EDF4FF] px-5 py-3 text-base sm:flex-row dark:bg-[#333];
+    @apply font-quote mb-5 flex flex-col gap-x-5 gap-y-3 rounded-lg border-s border-l-4 border-solid bg-[#f5effe] px-5 py-3 text-base sm:flex-row dark:bg-[#2b2739];
 }
 
 blockquote .quote-icon {
-    @apply text-accent flex-shrink-0;
+    @apply text-accent shrink-0;
     margin-top: 2px;
 }
 

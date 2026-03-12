@@ -1,7 +1,7 @@
 ---
 title: Getting Started with AstroRift
 category: How-To
-pubDate: 2026-03-12
+pubDate: 2026-03-13
 heroImage: '@/assets/how-to/getting-started-with-astrorift/heroImage.png'
 tags: astro, getting started, template, how to
 draft: false
@@ -35,7 +35,7 @@ Create a Markdown (or MDX) file anywhere under `src/content/blog/`. Subdirectori
 ---
 title: My First Post
 category: My Category
-pubDate: 2026-03-12
+pubDate: 2026-03-11
 tags: hello, world
 heroImage: '@/assets/my-post/heroImage.png'
 draft: false
