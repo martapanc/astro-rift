@@ -1,0 +1,68 @@
+---
+import { getBlogPosts } from '@/utils/posts';
+import { SITE_TITLE, PAGE_SIZE } from '@/consts';
+import { getUniqueCategories, getPostsByCategory } from '@/utils/categories';
+import { CategoryBox } from '@/components/shared/Box.tsx';
+import BlogLayout from '@/layouts/BlogLayout.astro';
+import PostList from '@/components/blog/PostList.tsx';
+import Pagination from '@/components/shared/Pagination.tsx';
+import { getPostsWithOptimizedImages } from '@/utils/images';
+
+export const prerender = true;
+
+export async function getStaticPaths({ paginate }: any) {
+    const allPosts = await getBlogPosts();
+    const categories = getUniqueCategories(allPosts);
+
+    return categories.flatMap((category) => {
+        const categoryPosts = getPostsByCategory(allPosts, category).sort(
+            (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
+        );
+
+        return paginate(categoryPosts, {
+            params: { category },
+            props: {
+                categoryDisplay: categoryPosts[0]?.data.category || category,
+            },
+            pageSize: PAGE_SIZE,
+        });
+    });
+}
+
+const { page, categoryDisplay } = Astro.props;
+const { category } = Astro.params;
+const allPosts = await getBlogPosts();
+const allCategoryPosts = getPostsByCategory(allPosts, category);
+
+const title = `${categoryDisplay} - ${SITE_TITLE}`;
+const description = `Articoli nella categoria ${categoryDisplay}`;
+
+const postsWithImages = await getPostsWithOptimizedImages(page.data);
+---
+
+<BlogLayout
+    title={title}
+    description={description}
+    posts={allPosts}
+    currentCategory={categoryDisplay}
+    pagefindIgnore
+>
+    <CategoryBox
+        slot="header"
+        category={categoryDisplay}
+        postsLength={allCategoryPosts.length}
+        client:load
+    />
+
+    <PostList slot="main-content" posts={postsWithImages} sortable client:load />
+
+    <Pagination
+        slot="pagination"
+        client:load
+        currentPage={page.currentPage}
+        lastPage={page.lastPage}
+        urlPattern={page.currentPage === 1
+            ? `/category/${category}/2`
+            : `/category/${category}/${page.currentPage}`}
+    />
+</BlogLayout>

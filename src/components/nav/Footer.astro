@@ -1,0 +1,78 @@
+---
+import {
+    email,
+    SITE_DESCRIPTION_PLAIN,
+    SITE_TITLE,
+    social,
+} from '@/consts.ts';
+import { Icon } from 'astro-icon/components';
+import { getYear } from 'date-fns';
+const today = new Date();
+---
+
+<footer>
+    <div class="flex justify-between bg-[#1a1a1a] py-16 pb-8">
+        <div
+            class="container flex flex-col justify-between gap-y-4 text-center md:flex-row md:text-left"
+        >
+            <div class="flex flex-col gap-3">
+                <a href="/">
+                    <h2 id="title" class="text-2xl text-white sm:text-3xl">
+                        {SITE_TITLE}
+                    </h2>
+                </a>
+                <h3>{SITE_DESCRIPTION_PLAIN}</h3>
+            </div>
+
+            <div class="social-links mt-4 flex justify-center gap-2">
+                <a href="/rss.xml" class="mx-1.5" aria-label="Feed RSS">
+                    <Icon name="bi:rss-fill" class="h-5 w-5" />
+                </a>
+                {
+                    social.map(({ name, url, icon }) => (
+                        <a href={url} target="_blank" class="mx-1" aria-label={name}>
+                            <Icon name={icon} class="h-5 w-5" />
+                        </a>
+                    ))
+                }
+            </div>
+        </div>
+    </div>
+    <div class="bg-black">
+        <div class="container flex flex-col items-center gap-4 px-6 pt-6 pb-12 text-center">
+            <span class="text-gray-300">
+                <a href={`mailto:${email}`} target="_blank">{email}</a> &copy; {getYear(today)}
+            </span>
+            <div class="flex flex-wrap justify-center text-center text-pretty text-[#bbb]">
+                Made with 💙 by&nbsp;<a href="https://github.com/martapanc" target="_blank" class="text-white">martapanc</a>&nbsp;| Based on&nbsp;
+                <a
+                    href="https://themeansar.com/free-themes/blogrift/"
+                    class="text-white"
+                    target="_blank">Blogrift</a
+                >
+                &nbsp;by&nbsp;
+                <a href="https://themeansar.com/" class="text-white" target="_blank">Themeansar</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<style>
+    @reference "../../styles/global.css";
+
+    footer {
+        @apply text-base text-white;
+
+        #title {
+            font-family: var(--font-title), serif;
+            @apply font-bold;
+
+            a {
+                @apply text-primary no-underline;
+            }
+        }
+    }
+
+    .social-links a {
+        @apply text-white no-underline hover:text-gray-300;
+    }
+</style>

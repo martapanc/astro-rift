@@ -1,0 +1,70 @@
+---
+import { getBlogPosts } from '@/utils/posts';
+import { SITE_TITLE, PAGE_SIZE } from '@/consts';
+import { getUniqueYears, getPostsByYear } from '@/utils/archives';
+import BlogLayout from '@/layouts/BlogLayout.astro';
+import { Breadcrumbs } from '@/components/nav/Breadcrumbs.tsx';
+import PostList from '@/components/blog/PostList.tsx';
+import Pagination from '@/components/shared/Pagination.tsx';
+import { getPostsWithOptimizedImages } from '@/utils/images';
+
+export const prerender = true;
+
+export async function getStaticPaths({ paginate }: any) {
+    const allPosts = await getBlogPosts();
+    const years = getUniqueYears(allPosts);
+
+    return years.flatMap((year) => {
+        const yearPosts = getPostsByYear(allPosts, year).sort(
+            (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+        );
+
+        return paginate(yearPosts, {
+            params: { year: String(year) },
+            props: {
+                year,
+            },
+            pageSize: PAGE_SIZE,
+        });
+    });
+}
+
+const { page, year } = Astro.props;
+const allPosts = await getBlogPosts();
+const allYearPosts = getPostsByYear(allPosts, year);
+
+const title = `${year} - ${SITE_TITLE}`;
+const description = `Articoli pubblicati nel ${year}`;
+
+const breadcrumbs = [{ label: 'Homepage', href: '/' }, { label: String(year) }];
+
+const postsWithImages = await getPostsWithOptimizedImages(page.data);
+---
+
+<BlogLayout title={title} description={description} posts={allPosts} pagefindIgnore>
+    <div
+        slot="header"
+        class="light:border light:border-border bg-background2 mb-8 rounded-lg p-4 px-5 shadow-md"
+    >
+        <div class="flex items-center justify-between gap-4">
+            <div class="flex flex-col">
+                <h1 class="font-header text-3xl font-bold">{year}</h1>
+                <span class="text-sm text-gray-600 dark:text-gray-200">
+                    {allYearPosts.length}{' '}
+                    {allYearPosts.length === 1 ? 'articolo' : 'articoli'}
+                </span>
+            </div>
+            <Breadcrumbs items={breadcrumbs} client:load />
+        </div>
+    </div>
+
+    <PostList slot="main-content" posts={postsWithImages} client:load />
+
+    <Pagination
+        slot="pagination"
+        client:load
+        currentPage={page.currentPage}
+        lastPage={page.lastPage}
+        urlPattern={page.currentPage === 1 ? `/${year}/2` : `/${year}/${page.currentPage}`}
+    />
+</BlogLayout>

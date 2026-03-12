@@ -1,0 +1,72 @@
+---
+import { getBlogPosts } from '@/utils/posts';
+import { SITE_DESCRIPTION_PLAIN, SITE_TITLE, PAGE_SIZE } from '@/consts.ts';
+import BlogLayout from '@/layouts/BlogLayout.astro';
+import PostList from '@/components/blog/PostList.tsx';
+import Pagination from '@/components/shared/Pagination.tsx';
+import FeaturedSlideshow from '@/components/home/FeaturedSlideshow.tsx';
+import { getFeaturedPostsWithImages, getPostsWithOptimizedImages } from '@/utils/images';
+
+const allPosts = await getBlogPosts();
+const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const totalPages = Math.ceil(posts.length / PAGE_SIZE);
+const currentPagePosts = posts.slice(0, PAGE_SIZE);
+
+// Get featured posts for slideshow (sorted by featuredRank if present, then by pubDate)
+const featuredPosts = allPosts
+    .filter((post) => post.data.featured)
+    .sort((a, b) => {
+        const rankA = a.data.featuredRank ?? Infinity;
+        const rankB = b.data.featuredRank ?? Infinity;
+        if (rankA !== rankB) return rankA - rankB;
+        return b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+    })
+    .slice(0, 6);
+
+// Pre-optimize images for featured posts and current page posts
+const [featuredPostsWithImages, currentPagePostsWithImages] = await Promise.all([
+    getFeaturedPostsWithImages(featuredPosts),
+    getPostsWithOptimizedImages(currentPagePosts),
+]);
+---
+
+<BlogLayout title={SITE_TITLE} description={SITE_DESCRIPTION_PLAIN} posts={allPosts}>
+    <Fragment slot="head">
+        {
+            featuredPostsWithImages.map(
+                ({ optimizedImage }, index) =>
+                    optimizedImage && (
+                        <link
+                            rel="preload"
+                            as="image"
+                            href={optimizedImage.src}
+                            imagesrcset={optimizedImage.srcset}
+                            imagesizes={optimizedImage.sizes}
+                            fetchpriority={index === 0 ? 'high' : 'low'}
+                        />
+                    ),
+            )
+        }
+    </Fragment>
+
+    {
+        featuredPostsWithImages.length > 0 && (
+            <FeaturedSlideshow slot="featured" client:load posts={featuredPostsWithImages} />
+        )
+    }
+
+    <PostList slot="main-content" posts={currentPagePostsWithImages} client:load />
+
+    {
+        totalPages > 1 && (
+            <Pagination
+                slot="pagination"
+                client:load
+                currentPage={1}
+                lastPage={totalPages}
+                urlPattern="/page/2"
+            />
+        )
+    }
+</BlogLayout>

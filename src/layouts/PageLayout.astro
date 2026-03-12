@@ -1,0 +1,35 @@
+---
+import BaseHead from '@/components/nav/BaseHead.astro';
+import Footer from '@/components/nav/Footer.astro';
+import Header from '@/components/nav/Header.astro';
+import BackToTop from '@/components/nav/BackToTop.tsx';
+import CookieConsent from '@/components/CookieConsent.astro';
+import { cookieBannerEnabled, SITE_LANG } from '@/consts.ts';
+
+interface Props {
+    title: string;
+    description: string;
+    pagefindIgnore?: boolean;
+}
+
+const { title, description, pagefindIgnore } = Astro.props;
+---
+
+<!doctype html>
+<html lang=`${SITE_LANG}` role="main">
+    <head>
+        <BaseHead title={title} description={description} />
+        <slot name="head" />
+    </head>
+    <body data-pagefind-ignore={pagefindIgnore ? 'all' : undefined}>
+        <Header />
+        <div class="container flex flex-col py-7 sm:py-12">
+            <slot name="header" />
+
+            <slot name="main-content" />
+        </div>
+        <Footer />
+        {cookieBannerEnabled && <CookieConsent />}
+        <BackToTop client:load />
+    </body>
+</html>

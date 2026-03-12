@@ -1,0 +1,387 @@
+---
+import { SITE_TITLE, SITE_DESCRIPTION, social, menu } from '@/consts.ts';
+import type { MenuItem } from '@/consts.ts';
+import HeaderLink from './HeaderLink.astro';
+import DarkModeToggle from './DarkModeToggle.astro';
+import { Icon } from 'astro-icon/components';
+
+const pathname = Astro.url.pathname;
+
+// Check if any child URL matches the current path
+const isDropdownActive = (item: MenuItem) => {
+    if (!item.children) return false;
+    return item.children.some((child) => {
+        return child.url && pathname.startsWith(child.url);
+    });
+};
+---
+
+<header>
+    <nav class="flex flex-col">
+        <div
+            class="header bg-background2 container flex min-h-[120px] w-full flex-row items-center justify-between py-4 lg:min-h-[164px] lg:bg-transparent lg:py-8"
+        >
+            <div class="flex w-1/6 justify-start lg:hidden lg:w-1/3">
+                <button
+                    id="mobile-menu-toggle"
+                    class="relative h-10 w-10 cursor-pointer rounded-lg p-1 hover:bg-gray-100"
+                    aria-label="Toggle menu"
+                >
+                    <Icon
+                        id="menu-icon"
+                        name="material-symbols:menu-rounded"
+                        class="icon-hamburger absolute inset-0 h-10 w-10 transition-opacity duration-300"
+                    />
+                    <Icon
+                        id="close-icon"
+                        name="material-symbols:close-rounded"
+                        class="icon-close absolute inset-0 h-10 w-10 opacity-0 transition-opacity duration-300"
+                    />
+                </button>
+            </div>
+            <div class="hidden justify-start lg:flex lg:w-1/3">
+                {
+                    social.map(({ name, url, icon }) => (
+                        <a href={url} target="_blank" class="mx-3" aria-label={name}>
+                            <Icon name={icon} class="h-5 w-5" />
+                        </a>
+                    ))
+                }
+            </div>
+
+            <div
+                class="transition-300 flex w-2/3 flex-col justify-center gap-1.5 text-center transition-all sm:gap-3 lg:w-1/3"
+            >
+                <h1 id="title" class="text-2xl sm:text-4xl">
+                    <a href="/">
+                        <img src="/public/logo.png" alt="logo" />
+                    </a>
+                </h1>
+                <h2 id="description" class="text-sm sm:text-base" set:html={SITE_DESCRIPTION} />
+            </div>
+
+            <div class="flex w-1/6 justify-end lg:w-1/3">
+                <DarkModeToggle />
+            </div>
+        </div>
+
+        <div
+            class="internal-links bg-background2 border-border hidden w-full flex-row items-center justify-center gap-1 border-x-0 border-y-[1px] border-solid pt-2 shadow-md lg:flex"
+        >
+            {
+                menu.map((item) =>
+                    item.children ? (
+                        <div class="dropdown-container group relative" data-desktop-dropdown>
+                            <button
+                                class:list={[
+                                    'dropdown-trigger flex cursor-pointer items-center gap-1 border-b-4 bg-transparent px-[15px] py-2 text-[22px] font-semibold no-underline transition-colors duration-200',
+                                    isDropdownActive(item)
+                                        ? 'border-primary'
+                                        : 'border-transparent',
+                                ]}
+                                type="button"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                            >
+                                {item.name}
+                                <Icon
+                                    name="mdi:chevron-down"
+                                    class="h-5 w-5 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180"
+                                />
+                            </button>
+                            <div class="dropdown-menu bg-background2 invisible absolute top-full left-1/2 z-50 mt-1 min-w-[200px] -translate-x-1/2 rounded-md py-1 opacity-0 shadow-lg transition-all duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                                {item.children.map((child) =>
+                                    child.url ? (
+                                        <HeaderLink
+                                            href={child.url}
+                                            class="dropdown-item block w-full !border-b-0 !px-5 !py-3 !text-lg whitespace-nowrap hover:bg-slate-100 dark:hover:bg-neutral-800"
+                                        >
+                                            {child.name}
+                                        </HeaderLink>
+                                    ) : (
+                                        <a class="dropdown-item block w-full !border-b-0 !px-5 !py-3 !text-lg whitespace-nowrap">
+                                            {child.name}
+                                        </a>
+                                    ),
+                                )}
+                            </div>
+                        </div>
+                    ) : (
+                        <HeaderLink href={item.url}>{item.name}</HeaderLink>
+                    ),
+                )
+            }
+        </div>
+
+        <div class="navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav m-0 mx-auto flex list-none flex-col p-2">
+                {
+                    menu.map((item) =>
+                        item.children ? (
+                            <li
+                                class:list={[
+                                    'menu-item mobile-dropdown text-xl font-semibold',
+                                    { active: isDropdownActive(item) },
+                                ]}
+                            >
+                                <button
+                                    class="mobile-dropdown-trigger nav-link flex w-full cursor-pointer items-center justify-between"
+                                    type="button"
+                                >
+                                    <span>{item.name}</span>
+                                    <Icon
+                                        name="mdi:chevron-down"
+                                        class="chevron-icon h-5 w-5 transition-transform duration-200"
+                                    />
+                                </button>
+                                <ul class="mobile-dropdown-menu m-0 max-h-0 list-none overflow-hidden p-0 transition-all duration-500">
+                                    {item.children.map((child) => (
+                                        <li>
+                                            <a
+                                                class="nav-link submenu-link bg-secondary hover:bg-accent block !py-3.5 !pl-9 text-base"
+                                                title={child.name}
+                                                href={child.url}
+                                            >
+                                                {child.name}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </li>
+                        ) : (
+                            <li class="menu-item text-xl font-semibold">
+                                <a class="nav-link" title={item.name} href={item.url}>
+                                    {item.name}
+                                </a>
+                            </li>
+                        ),
+                    )
+                }
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<script>
+    function initMenuToggle() {
+        const toggleButton = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('navbar-collapse');
+
+        // Mobile menu toggle
+        toggleButton?.addEventListener('click', () => {
+            mobileMenu?.classList.toggle('show');
+            toggleButton?.classList.toggle('open');
+        });
+
+        // Close menu when clicking a regular link (not dropdown triggers)
+        const menuLinks = mobileMenu?.querySelectorAll('a.nav-link');
+        menuLinks?.forEach((link) => {
+            link.addEventListener('click', () => {
+                mobileMenu?.classList.remove('show');
+                toggleButton?.classList.remove('open');
+            });
+        });
+
+        // Mobile dropdown toggle
+        const dropdownTriggers = document.querySelectorAll('.mobile-dropdown-trigger');
+        dropdownTriggers.forEach((trigger) => {
+            trigger.addEventListener('click', () => {
+                const parent = trigger.closest('.mobile-dropdown');
+                parent?.classList.toggle('open');
+            });
+        });
+
+        // Desktop dropdown keyboard behavior and aria state
+        const desktopDropdowns = document.querySelectorAll<HTMLElement>('[data-desktop-dropdown]');
+        desktopDropdowns.forEach((dropdown) => {
+            const trigger = dropdown.querySelector('.dropdown-trigger');
+            const menu = dropdown.querySelector('.dropdown-menu');
+            if (!(trigger instanceof HTMLButtonElement) || !(menu instanceof HTMLElement)) return;
+
+            const setExpanded = (expanded: boolean) => {
+                trigger.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+            };
+
+            dropdown.addEventListener('focusin', () => setExpanded(true));
+            dropdown.addEventListener('focusout', (event) => {
+                const relatedTarget = (event as FocusEvent).relatedTarget;
+                if (!(relatedTarget instanceof Node) || !dropdown.contains(relatedTarget)) {
+                    setExpanded(false);
+                }
+            });
+
+            trigger.addEventListener('click', () => {
+                const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+                setExpanded(!isExpanded);
+            });
+
+            trigger.addEventListener('keydown', (event: KeyboardEvent) => {
+                if (event.key === 'ArrowDown') {
+                    event.preventDefault();
+                    setExpanded(true);
+                    const firstItem = menu.querySelector('a, button');
+                    if (firstItem instanceof HTMLElement) firstItem.focus();
+                }
+            });
+
+            dropdown.addEventListener('keydown', (event) => {
+                const keyboardEvent = event as KeyboardEvent;
+                if (keyboardEvent.key === 'Escape') {
+                    setExpanded(false);
+                    trigger.focus();
+                }
+            });
+        });
+    }
+
+    // Initialize on page load
+    initMenuToggle();
+
+    // Re-run on page navigation (for Astro view transitions)
+    document.addEventListener('astro:after-swap', initMenuToggle);
+</script>
+<style>
+    @reference "../../styles/global.css";
+
+    header {
+        box-shadow: 0 2px 8px rgba(var(--black), 5%);
+        transition: background-color 0.3s ease;
+
+        #title {
+            font-family: var(--font-title), serif;
+            @apply font-bold;
+
+            a {
+                @apply text-primary no-underline;
+            }
+        }
+
+        #description {
+            @apply text-accent;
+        }
+    }
+
+    :global(.dark) header {
+        background: var(--background);
+    }
+
+    h2 {
+        margin: 0;
+        font-size: 1em;
+    }
+
+    h2 a,
+    h2 a.active {
+        text-decoration: none;
+    }
+
+    nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    nav .internal-links a {
+        padding: 8px 15px;
+        color: var(--black);
+        border-bottom: 4px solid transparent;
+        text-decoration: none;
+        font-family: var(--font-header), serif;
+        font-size: 22px;
+        font-weight: 600;
+    }
+
+    nav .internal-links a.active {
+        text-decoration: none;
+        border-bottom-color: var(--primary);
+    }
+
+    .social-links,
+    .social-links a {
+        display: flex;
+    }
+
+    @media (max-width: 720px) {
+        .social-links {
+            display: none;
+        }
+    }
+
+    .header {
+        @media (max-width: 1024px) {
+            @apply border-border border-x-0 border-y-[1px] border-solid shadow-md;
+        }
+    }
+
+    /* Mobile menu styles */
+    .navbar-collapse {
+        @apply bg-background2;
+
+        display: none;
+        width: 100%;
+        overflow: hidden;
+        max-height: 0;
+        transition:
+            max-height 0.3s ease-in-out,
+            border 0.3s ease-in-out,
+            box-shadow 0.3s ease-in-out;
+
+        @media (max-width: 1024px) {
+            display: block;
+        }
+
+        &.show {
+            max-height: 500px;
+            @apply border-border border-x-0 border-b-[1px] border-solid shadow-md;
+        }
+
+        .menu-item {
+            border-bottom: 1px solid rgba(var(--gray-light), 0.3);
+        }
+
+        .nav-link {
+            @apply bg-primary hover:bg-secondary block !text-white no-underline;
+
+            padding: 1rem 1.5rem;
+            color: rgb(var(--white));
+            font-family: var(--font-header), serif;
+            transition: background-color 0.2s ease;
+
+            &.mobile-dropdown-trigger {
+                @apply flex items-center justify-between;
+            }
+        }
+    }
+
+    /* Animate the menu icon - fade between hamburger and X */
+    #mobile-menu-toggle {
+        &.open {
+            .icon-hamburger {
+                opacity: 0;
+            }
+
+            .icon-close {
+                opacity: 1;
+            }
+        }
+    }
+
+    /* Desktop dropdown styles */
+    .dropdown-trigger {
+        color: var(--black);
+        font-family: var(--font-header), serif;
+    }
+
+    /* Mobile dropdown styles */
+    .mobile-dropdown {
+        &.open {
+            .chevron-icon {
+                @apply rotate-180;
+            }
+
+            .mobile-dropdown-menu {
+                @apply max-h-[500px];
+            }
+        }
+    }
+</style>

@@ -1,0 +1,139 @@
+---
+import { type CollectionEntry, render } from 'astro:content';
+import { getBlogPosts } from '@/utils/posts';
+import { Image } from 'astro:assets';
+import BlogLayout from '@/layouts/BlogLayout.astro';
+import { Box, BreadcrumbsBox } from '@/components/shared/Box.tsx';
+import PostHeader from '@/components/blog/PostHeader.tsx';
+import PostNavigation from '@/components/blog/PostNavigation.tsx';
+import LatestPostsGrid from '@/components/blog/LatestPostsGrid.tsx';
+import { SocialShare } from '@/components/blog/SocialShare.tsx';
+import { getCategoryNavigation } from '@/utils/postNavigation';
+import { getPostExcerpt, stripEndSections } from '@/utils/excerpt';
+import readingTime from 'reading-time';
+import { SITE_LANG, SITE_TITLE } from '@/consts.ts';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+    const posts = await getBlogPosts();
+    return posts.map((post) => ({
+        params: { slug: post.id },
+        props: post,
+    }));
+}
+
+type Props = CollectionEntry<'blog'>;
+
+const post = Astro.props;
+const { Content } = await render(post);
+const { title, heroImage } = post.data;
+const description = getPostExcerpt(post);
+const isEnglishPost = post.id.endsWith('-en');
+const locale = SITE_LANG;
+const author = SITE_TITLE;
+const socialHandle = `@${SITE_TITLE}`;
+const robots = post.data.draft ? 'noindex,nofollow' : 'index,follow';
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString();
+const blogPostingJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: title,
+    description,
+    image: heroImage ? new URL(heroImage.src, Astro.site ?? Astro.url).toString() : undefined,
+    datePublished: post.data.pubDate.toISOString(),
+    dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+    author: {
+        '@type': 'Person',
+        name: author,
+    },
+    publisher: {
+        '@type': 'Organization',
+        name: SITE_TITLE,
+    },
+    mainEntityOfPage: canonicalUrl,
+    articleSection: post.data.category,
+    keywords: post.data.tags?.join(', '),
+};
+
+const contentForReading = stripEndSections(post.body!);
+const stats = readingTime(contentForReading, { wordsPerMinute: 290 });
+
+const breadcrumbs = [
+    { label: 'Homepage', href: '/' },
+    {
+        label: post.data.category,
+        href: `/category/${post.data.category.toLowerCase()}`,
+    },
+    { label: title },
+];
+
+// Get navigation to previous/next posts in same category
+const allPosts = await getBlogPosts();
+const { prev, next } = getCategoryNavigation(post, allPosts);
+
+// Get latest 4 posts excluding the current one
+const latestPosts = allPosts
+    .filter((p) => p.id !== post.id)
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    .slice(0, 4);
+---
+
+<BlogLayout
+    title={title}
+    description={description}
+    image={heroImage}
+    ogType="article"
+    locale={locale}
+    publishedTime={post.data.pubDate}
+    modifiedTime={post.data.updatedDate ?? post.data.pubDate}
+    author={author}
+    section={post.data.category}
+    tags={post.data.tags}
+    twitterSite={socialHandle}
+    twitterCreator={socialHandle}
+    robots={robots}
+    jsonLd={blogPostingJsonLd}
+>
+    <BreadcrumbsBox slot="header" client:load items={breadcrumbs} />
+
+    <div slot="main-content" class="xl:w-[1000px] 2xl:w-[1040px]">
+        <Box client:load className="!p-0">
+            <article>
+                <PostHeader client:load post={post} readingMinutes={Math.round(stats.minutes)} />
+
+                {
+                    heroImage && (
+                        <div class="mb-7 w-full">
+                            <Image
+                                width={1020}
+                                height={510}
+                                src={heroImage}
+                                alt=""
+                                class="h-auto w-full"
+                            />
+                        </div>
+                    )
+                }
+
+                <div class="prose max-w-none p-4 sm:p-5" data-pagefind-body>
+                    <h1 data-pagefind-meta="title" class="sr-only">{title}</h1>
+                    <Content />
+                </div>
+
+                <div class="px-5 pb-5 print:hidden">
+                    <SocialShare
+                        client:load
+                        url={`${Astro.site?.toString()}/posts/${post.id}`}
+                        title={title}
+                    />
+                    <PostNavigation client:load prev={prev} next={next} />
+                </div>
+            </article>
+        </Box>
+
+        <div class="print:hidden">
+            <LatestPostsGrid client:load posts={latestPosts} />
+        </div>
+    </div>
+</BlogLayout>

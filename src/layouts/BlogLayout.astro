@@ -1,0 +1,150 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { ImageMetadata } from 'astro';
+import { getBlogPosts } from '@/utils/posts';
+import BaseHead from '@/components/nav/BaseHead.astro';
+import Footer from '@/components/nav/Footer.astro';
+import Header from '@/components/nav/Header.astro';
+import BackToTop from '@/components/nav/BackToTop.tsx';
+import Categories from '@/components/sidebar/Categories.tsx';
+import LatestArticles from '@/components/sidebar/LatestArticles.tsx';
+import Archives from '@/components/sidebar/Archives.tsx';
+import Tags from '@/components/sidebar/Tags.tsx';
+import SearchBox from '@/components/sidebar/SearchBox.astro';
+import { getUniqueCategories } from '@/utils/categories';
+import { getUniqueMonths } from '@/utils/archives';
+import CookieConsent from '@/components/CookieConsent.astro';
+import { cookieBannerEnabled } from '@/consts.ts';
+
+interface Props {
+    title: string;
+    description: string;
+    image?: ImageMetadata;
+    ogType?: 'website' | 'article';
+    locale?: string;
+    publishedTime?: Date | string;
+    modifiedTime?: Date | string;
+    author?: string;
+    section?: string;
+    tags?: string[];
+    twitterSite?: string;
+    twitterCreator?: string;
+    robots?: string;
+    jsonLd?: Record<string, unknown> | Array<Record<string, unknown>>;
+    posts?: CollectionEntry<'blog'>[];
+    currentCategory?: string;
+    currentYear?: number;
+    currentMonth?: number;
+    pagefindIgnore?: boolean;
+}
+
+const { title, description, currentCategory, currentYear, currentMonth, pagefindIgnore } =
+    Astro.props;
+
+const allPosts = await getBlogPosts();
+
+const categories = getUniqueCategories(allPosts).map((category) => ({
+    name: category,
+    count: allPosts.filter((post) => post.data.category.toLowerCase() === category.toLowerCase())
+        .length,
+}));
+
+const archives = getUniqueMonths(allPosts).map(({ year, month }) => ({
+    year,
+    month,
+    count: allPosts.filter((post) => {
+        const postDate =
+            post.data.pubDate instanceof Date ? post.data.pubDate : new Date(post.data.pubDate);
+        return postDate.getFullYear() === year && postDate.getMonth() + 1 === month;
+    }).length,
+}));
+
+const latestArticles = allPosts
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    .slice(0, 5)
+    .map((post) => ({
+        id: post.id,
+        title: post.data.title,
+    }));
+
+const tagCounts = new Map<string, number>();
+allPosts.forEach((post) => {
+    post.data.tags?.forEach((tag) => {
+        const lowerTag = tag.toLowerCase();
+        tagCounts.set(lowerTag, (tagCounts.get(lowerTag) || 0) + 1);
+    });
+});
+
+const tags = Array.from(tagCounts.entries())
+    .map(([name, count]) => ({ name, count }))
+    .sort((a, b) => b.count - a.count);
+---
+
+<!doctype html>
+<html lang="en" role="main">
+    <head>
+        <BaseHead
+            title={title}
+            description={description}
+            image={Astro.props.image}
+            ogType={Astro.props.ogType}
+            locale={Astro.props.locale}
+            publishedTime={Astro.props.publishedTime}
+            modifiedTime={Astro.props.modifiedTime}
+            author={Astro.props.author}
+            section={Astro.props.section}
+            tags={Astro.props.tags}
+            twitterSite={Astro.props.twitterSite}
+            twitterCreator={Astro.props.twitterCreator}
+            robots={Astro.props.robots}
+            jsonLd={Astro.props.jsonLd}
+        />
+        <slot name="head" />
+    </head>
+    <body data-pagefind-ignore={pagefindIgnore ? 'all' : undefined}>
+        <Header />
+        <div class="container flex flex-col py-7 sm:py-12">
+            <slot name="featured" />
+
+            <div class="print:hidden">
+                <slot name="header" />
+            </div>
+
+            <div class="flex flex-col gap-x-5 gap-y-12 xl:flex-row">
+                <!-- Main content -->
+                <div class="min-h-[60vh] flex-1">
+                    <slot name="main-content" />
+                </div>
+
+                <div class="xl:hidden">
+                    <slot name="pagination" />
+                </div>
+
+                <!-- Sidebar -->
+                <div class="flex min-h-[40vh] flex-col gap-7 lg:flex-1 print:hidden">
+                    <SearchBox postUrls={allPosts.map((post) => `/${post.id}`)} />
+                    <Categories
+                        categories={categories}
+                        currentCategory={currentCategory}
+                        client:load
+                    />
+                    <Tags tags={tags} client:load />
+                    <LatestArticles articles={latestArticles} client:load />
+                    <Archives
+                        archives={archives}
+                        currentYear={currentYear}
+                        currentMonth={currentMonth}
+                        client:load
+                    />
+                </div>
+            </div>
+
+            <div class="hidden xl:block">
+                <slot name="pagination" />
+            </div>
+        </div>
+        <Footer />
+        {cookieBannerEnabled && <CookieConsent />}
+        <BackToTop client:load />
+    </body>
+</html>

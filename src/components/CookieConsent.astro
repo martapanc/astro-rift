@@ -1,0 +1,169 @@
+---
+// CookieConsent component using vanilla-cookieconsent
+// Documentation: https://cookieconsent.orestbida.com/
+---
+
+<script>
+    import * as CookieConsent from 'vanilla-cookieconsent';
+    import 'vanilla-cookieconsent/dist/cookieconsent.css';
+    import { SITE_LANG } from '@/consts.ts';
+
+    // Initialize cookie consent
+    CookieConsent.run({
+        // Root element
+        root: 'body',
+
+        // Auto-clear cookies when user rejects them
+        autoClearCookies: true,
+
+        // Cookie name
+        cookie: {
+            name: 'cc_cookie',
+            // Domain of your website
+            // domain: location.hostname,
+            // Cookie path
+            path: '/',
+            // Expiration (in days)
+            expiresAfterDays: 365,
+        },
+
+        // Consent modal
+        guiOptions: {
+            consentModal: {
+                layout: 'bar inline',
+                position: 'bottom right',
+            },
+            preferencesModal: {
+                layout: 'box',
+            },
+        },
+
+        // Categories of cookies
+        categories: {
+            necessary: {
+                enabled: true, // Always enabled
+                readOnly: true, // Cannot be disabled
+            },
+            analytics: {
+                enabled: false,
+                readOnly: false,
+                autoClear: {
+                    cookies: [
+                        {
+                            name: /^_ga/, // Google Analytics cookies
+                        },
+                        {
+                            name: '_gid',
+                        },
+                    ],
+                },
+            },
+        },
+
+        language: {
+            default: SITE_LANG,
+            translations: {
+                it: {
+                    consentModal: {
+                        title: 'È tempo di cookies 🍪',
+                        description:
+                            'Questo sito web utilizza i cookie per migliorare la tua esperienza di navigazione e analizzare il traffico del sito. Puoi scegliere quali cookie accettare.',
+                        acceptAllBtn: 'Accetta',
+                        acceptNecessaryBtn: 'Rifiuta',
+                        showPreferencesBtn: 'Preferenze',
+                    },
+                    preferencesModal: {
+                        title: 'Preferenze',
+                        acceptAllBtn: 'Accetta',
+                        acceptNecessaryBtn: 'Rifiuta',
+                        savePreferencesBtn: 'Salva preferenze',
+                        closeIconLabel: 'Chiusi',
+                        sections: [
+                            {
+                                title: 'Uso dei cookies',
+                                description:
+                                    'Utilizziamo i cookie per garantire le funzionalità di base del sito web e migliorare la tua esperienza online. Puoi scegliere per ogni categoria se accettare o rifiutare i cookie in qualsiasi momento.',
+                            },
+                            {
+                                title: 'Cookie strettamente necessari',
+                                description:
+                                    'Questi cookie sono essenziali per il corretto funzionamento del sito web. Senza questi cookie, il sito web non funzionerebbe correttamente.',
+                                linkedCategory: 'necessary',
+                            },
+                            {
+                                title: 'Cookie analitici',
+                                description:
+                                    'Questi cookie raccolgono informazioni su come utilizzi il sito web, quali pagine hai visitato e quali link hai cliccato. Tutti i dati sono resi anonimi e non possono essere utilizzati per identificarti.',
+                                linkedCategory: 'analytics',
+                            },
+                            {
+                                title: 'Più informazioni',
+                                description:
+                                    'Per qualsiasi domanda relativa alla nostra politica sui cookie e alle tue scelte, ti preghiamo di <a class="cc-link" href="/contatti">contattarci</a>.',
+                            },
+                        ],
+                    },
+                },
+            },
+        },
+    });
+</script>
+
+<style is:global>
+    #cc-main {
+        --cc-bg: #fff;
+        --cc-primary-color: #000;
+        --cc-text: #4e565e;
+        --cc-btn-primary-bg: #304b96;
+        --cc-btn-primary-border-color: #304b96;
+        --cc-btn-primary-text: #fff;
+        --cc-btn-primary-hover-bg: #345f9f;
+        --cc-btn-primary-hover-border-color: #345f9f;
+        --cc-btn-secondary-bg: #e9ecef;
+        --cc-btn-secondary-text: #2d4156;
+        --cc-btn-secondary-hover-bg: #d3d9df;
+        --cc-toggle-bg-off: #919ea6;
+        --cc-toggle-bg-on: #304b96;
+        --cc-toggle-bg-readonly: #d5dee2;
+        --cc-toggle-knob-bg: #fff;
+        --cc-cookie-category-block-bg: #f0f4f7;
+        --cc-cookie-category-block-bg-hover: #e9eff4;
+        --cc-section-border: #f1f3f5;
+        --cc-cookie-table-border: #e9edf2;
+        --cc-overlay-bg: rgba(4, 6, 8, 0.85);
+        --cc-webkit-scrollbar-bg: #cfd5db;
+        --cc-webkit-scrollbar-bg-hover: #9199a0;
+    }
+
+    /* Dark mode support */
+    html.dark #cc-main {
+        --cc-bg: #1a1a1a;
+        --cc-primary-color: #fff;
+        --cc-secondary-color: #a5a5a5;
+        --cc-text: #ffffff;
+        --cc-btn-primary-bg: #b63083;
+        --cc-btn-primary-border-color: #b63083;
+        --cc-btn-primary-text: #fff;
+        --cc-btn-primary-hover-bg: #b23182;
+        --cc-btn-primary-hover-border-color: #b23182;
+        --cc-btn-secondary-bg: #2d2d2d;
+        --cc-btn-secondary-color: #fff;
+        --cc-btn-secondary-text: #f5f5f5;
+        --cc-btn-secondary-hover-bg: #3d3d3d;
+        --cc-btn-secondary-hover-color: #fff;
+        --cc-cookie-category-block-hover-bg: #2b2b2b;
+        --cc-toggle-bg-off: #667481;
+        --cc-toggle-bg-on: #b63083;
+        --cc-toggle-bg-readonly: #454c54;
+        --cc-toggle-knob-bg: #fff;
+        --cc-cookie-category-block-bg: #232323;
+        --cc-cookie-category-block-bg-hover: #2b2b2b;
+        --cc-section-border: #292929;
+        --cc-cookie-table-border: #2b2e32;
+        --cc-overlay-bg: rgba(0, 0, 0, 0.85);
+        --cc-webkit-scrollbar-bg: #454c54;
+        --cc-webkit-scrollbar-bg-hover: #667481;
+        --cc-separator-border-color: #454c54;
+        --cc-toggle-readonly-bg: #454c54;
+    }
+</style>

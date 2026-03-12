@@ -1,0 +1,67 @@
+---
+import Search from 'astro-pagefind/components/Search';
+
+interface Props {
+    postUrls?: string[];
+}
+
+const { postUrls = [] } = Astro.props;
+---
+
+<div class="light:border light:border-border bg-background2 rounded-lg p-4 shadow-md">
+    <h2 class="font-header wp-block-heading mb-5 py-1 text-xl font-semibold">Ricerca</h2>
+    <Search
+        id="search"
+        className="pagefind-ui"
+        uiOptions={{
+            showImages: false,
+            excerptLength: 20,
+            translations: {
+                placeholder: 'Cerca...',
+                clear_search: 'Cancella',
+                load_more: 'Carica altri risultati',
+                search_label: 'Cerca nel sito',
+                filters_label: 'Filtri',
+                zero_results: 'Nessun risultato per "[SEARCH_TERM]"',
+                many_results: '[COUNT] risultati per "[SEARCH_TERM]"',
+                one_result: '[COUNT] risultato per "[SEARCH_TERM]"',
+                alt_search:
+                    'Nessun risultato per "[SEARCH_TERM]". Risultati per "[DIFFERENT_TERM]":',
+                search_suggestion: 'Nessun risultato per "[SEARCH_TERM]". Prova:',
+                searching: 'Ricerca in corso...',
+            },
+        }}
+    />
+    {
+        postUrls.length > 0 && (
+            <div class="mt-4 text-center">
+                <span class="text-sm text-gray-500">...oppure </span>
+                <button
+                    id="random-article-btn"
+                    class="text-primary hover:text-accent cursor-pointer text-sm font-medium underline transition-colors"
+                    data-posts={JSON.stringify(postUrls)}
+                >
+                    leggi un post a caso
+                </button>
+            </div>
+        )
+    }
+</div>
+
+<script>
+    function initRandomArticle() {
+        const btn = document.getElementById('random-article-btn');
+        if (!btn) return;
+
+        btn.addEventListener('click', () => {
+            const posts = JSON.parse(btn.dataset.posts || '[]');
+            if (posts.length > 0) {
+                const randomIndex = Math.floor(Math.random() * posts.length);
+                window.location.href = posts[randomIndex];
+            }
+        });
+    }
+
+    initRandomArticle();
+    document.addEventListener('astro:after-swap', initRandomArticle);
+</script>

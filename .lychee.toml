@@ -1,0 +1,6 @@
+accept = [429, 200, 403]
+
+# Exclude filesystem paths (regex)
+exclude_path = [
+    "^\\.astro"
+]

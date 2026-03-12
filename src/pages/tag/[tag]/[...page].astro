@@ -1,0 +1,54 @@
+---
+import { getBlogPosts } from '@/utils/posts';
+import { SITE_TITLE, PAGE_SIZE } from '@/consts';
+import { getUniqueTags, getPostsByTag } from '@/utils/tags';
+import { TagBox } from '@/components/shared/Box.tsx';
+import BlogLayout from '@/layouts/BlogLayout.astro';
+import PostList from '@/components/blog/PostList.tsx';
+import Pagination from '@/components/shared/Pagination.tsx';
+import { getPostsWithOptimizedImages } from '@/utils/images';
+
+export const prerender = true;
+
+export async function getStaticPaths({ paginate }: any) {
+    const allPosts = await getBlogPosts();
+    const tags = getUniqueTags(allPosts);
+
+    return tags.flatMap((tag) => {
+        const tagPosts = getPostsByTag(allPosts, tag).sort(
+            (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
+        );
+
+        return paginate(tagPosts, {
+            params: { tag },
+            props: {
+                tagDisplay: tag,
+            },
+            pageSize: PAGE_SIZE,
+        });
+    });
+}
+
+const { page, tagDisplay } = Astro.props;
+const { tag } = Astro.params;
+const allPosts = await getBlogPosts();
+const allTagPosts = getPostsByTag(allPosts, tag);
+
+const title = `#${tagDisplay} - ${SITE_TITLE}`;
+const description = `Articoli con il tag #${tagDisplay}`;
+
+const postsWithImages = await getPostsWithOptimizedImages(page.data);
+---
+
+<BlogLayout title={title} description={description} posts={allPosts} pagefindIgnore>
+    <TagBox slot="header" tag={tagDisplay} postsLength={allTagPosts.length} client:load />
+
+    <PostList slot="main-content" posts={postsWithImages} sortable client:load />
+    <Pagination
+        slot="main-content"
+        client:load
+        currentPage={page.currentPage}
+        lastPage={page.lastPage}
+        urlPattern={page.currentPage === 1 ? `/tag/${tag}/2` : `/tag/${tag}/${page.currentPage}`}
+    />
+</BlogLayout>

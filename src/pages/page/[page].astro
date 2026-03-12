@@ -1,0 +1,66 @@
+---
+import { getBlogPosts } from '@/utils/posts.ts';
+import { SITE_DESCRIPTION_PLAIN, SITE_TITLE, PAGE_SIZE } from '@/consts.ts';
+import PostList from '@/components/blog/PostList.tsx';
+import Pagination from '@/components/shared/Pagination.tsx';
+import FeaturedSlideshow from '@/components/home/FeaturedSlideshow.tsx';
+import { getFeaturedPostsWithImages, getPostsWithOptimizedImages } from '@/utils/images.ts';
+import BlogLayout from '@/layouts/BlogLayout.astro';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+    const posts = (await getBlogPosts()).sort(
+        (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+    );
+
+    const totalPages = Math.ceil(posts.length / PAGE_SIZE);
+
+    // Generate pages 2 onwards (page 1 is at /)
+    return Array.from({ length: totalPages - 1 }, (_, i) => {
+        const pageNum = i + 2;
+        const start = (pageNum - 1) * PAGE_SIZE;
+        const end = start + PAGE_SIZE;
+
+        return {
+            params: { page: String(pageNum) },
+            props: {
+                posts: posts.slice(start, end),
+                currentPage: pageNum,
+                totalPages,
+            },
+        };
+    });
+}
+
+const { posts, currentPage, totalPages } = Astro.props;
+const allPosts = await getBlogPosts();
+
+// Get featured posts for slideshow
+const featuredPosts = allPosts
+    .filter((post) => post.data.featured)
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    .slice(0, 5);
+
+// Pre-optimize images
+const [featuredPostsWithImages, postsWithImages] = await Promise.all([
+    getFeaturedPostsWithImages(featuredPosts),
+    getPostsWithOptimizedImages(posts),
+]);
+---
+
+<BlogLayout title={SITE_TITLE} description={SITE_DESCRIPTION_PLAIN} posts={allPosts}>
+    {
+        featuredPostsWithImages.length > 0 && (
+            <FeaturedSlideshow slot="featured" client:load posts={featuredPostsWithImages} />
+        )
+    }
+    <PostList slot="main-content" posts={postsWithImages} client:load />
+    <Pagination
+        slot="pagination"
+        client:load
+        currentPage={currentPage}
+        lastPage={totalPages}
+        urlPattern={`/page/${currentPage}`}
+    />
+</BlogLayout>

@@ -1,0 +1,92 @@
+---
+import { getBlogPosts } from '@/utils/posts';
+import { SITE_TITLE, PAGE_SIZE } from '@/consts';
+import { getUniqueMonths, getPostsByMonth, getMonthName } from '@/utils/archives';
+import { capitalize } from '@/utils/string';
+import BlogLayout from '@/layouts/BlogLayout.astro';
+import { Breadcrumbs } from '@/components/nav/Breadcrumbs.tsx';
+import PostList from '@/components/blog/PostList.tsx';
+import Pagination from '@/components/shared/Pagination.tsx';
+import { getPostsWithOptimizedImages } from '@/utils/images';
+
+export const prerender = true;
+
+export async function getStaticPaths({ paginate }: any) {
+    const allPosts = await getBlogPosts();
+    const months = getUniqueMonths(allPosts);
+
+    return months.flatMap(({ year, month }) => {
+        const monthPosts = getPostsByMonth(allPosts, year, month).sort(
+            (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+        );
+
+        return paginate(monthPosts, {
+            params: {
+                year: String(year),
+                month: String(month).padStart(2, '0'),
+            },
+            props: {
+                year,
+                month,
+            },
+            pageSize: PAGE_SIZE,
+        });
+    });
+}
+
+const { page, year, month } = Astro.props;
+const allPosts = await getBlogPosts();
+const allMonthPosts = getPostsByMonth(allPosts, year, month);
+
+const monthName = getMonthName(month);
+const capitalizedMonth = capitalize(monthName);
+const title = `${capitalizedMonth} ${year} - ${SITE_TITLE}`;
+const description = `Articoli pubblicati a ${monthName} ${year}`;
+
+const breadcrumbs = [
+    { label: 'Homepage', href: '/' },
+    { label: String(year), href: `/${year}` },
+    { label: capitalizedMonth },
+];
+
+const monthParam = String(month).padStart(2, '0');
+
+const postsWithImages = await getPostsWithOptimizedImages(page.data);
+---
+
+<BlogLayout
+    title={title}
+    description={description}
+    posts={allPosts}
+    currentYear={year}
+    currentMonth={month}
+    pagefindIgnore
+>
+    <div
+        slot="header"
+        class="light:border light:border-border bg-background2 mb-8 rounded-lg p-4 px-5 shadow-md"
+    >
+        <div class="flex items-center justify-between gap-4">
+            <div class="flex flex-col">
+                <h1 class="font-header text-3xl font-bold">{capitalizedMonth} {year}</h1>
+                <span class="text-sm text-gray-600 dark:text-gray-200">
+                    {allMonthPosts.length}{' '}
+                    {allMonthPosts.length === 1 ? 'articolo' : 'articoli'}
+                </span>
+            </div>
+            <Breadcrumbs items={breadcrumbs} client:load />
+        </div>
+    </div>
+
+    <PostList slot="main-content" posts={postsWithImages} client:load />
+
+    <Pagination
+        slot="pagination"
+        client:load
+        currentPage={page.currentPage}
+        lastPage={page.lastPage}
+        urlPattern={page.currentPage === 1
+            ? `/${year}/${monthParam}/2`
+            : `/${year}/${monthParam}/${page.currentPage}`}
+    />
+</BlogLayout>

@@ -1,0 +1,16 @@
+# Archive sites (including org. subdomain)
+https?://(org\.)?archive\.ph.*
+https?://(org\.)?archive\.today.*
+https?://(org\.)?archive\.is.*
+https?://d-nb\.info
+https?://(www\.)?reddit\.com.*
+
+# Other exclusions
+https?://themeansar\.com.*
+https?://journals\.sagepub\.com.*
+
+# Astro build assets and source files
+.*\.mdx$
+
+# mailto links
+^mailto:
