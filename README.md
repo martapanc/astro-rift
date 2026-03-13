@@ -15,25 +15,21 @@ A WordPress-inspired blog theme re-engineered with Astro 5 & React — fast, ful
 - **Sitemap & robots.txt** — generated automatically at build time
 - **Reading time** — calculated per post
 - **Bibliography support** — custom rehype plugin for academic-style citations
-- **Contact form** — built with Formik + Yup, sends via Resend
 - **Analytics** — Cloudflare Web Analytics (optional)
-- **Error tracking** — Sentry with source map upload (optional)
-- **Vercel deployment** — adapter and edge config included
+- **Static output** — deploys to Netlify, Vercel, Cloudflare Pages, GitHub Pages, or any static host
 
 ## Tech Stack
 
-| Layer          | Technology               |
-|----------------|--------------------------|
-| Framework      | Astro 5                  |
-| UI             | React 19                 |
-| Styling        | Tailwind CSS 4           |
-| Markdown       | MDX, remark-gfm          |
-| Search         | Pagefind                 |
-| Forms          | Formik + Yup             |
-| Email          | Resend                   |
-| Analytics      | Cloudflare Web Analytics |
-| Error tracking | Sentry                   |
-| Deployment     | Vercel                   |
+| Layer      | Technology                          |
+|------------|-------------------------------------|
+| Framework  | Astro 5                             |
+| UI         | React 19                            |
+| Styling    | Tailwind CSS 4                      |
+| Markdown   | MDX, remark-gfm                     |
+| Search     | Pagefind                            |
+| Icons      | MDI + Phosphor via Iconify          |
+| Analytics  | Cloudflare Web Analytics (optional) |
+| Deployment | Any static host                     |
 
 ## Getting Started
 
@@ -69,7 +65,7 @@ export const menu: MenuItem[] = [
 ];
 
 export const social = [
-    { name: 'instagram', url: 'https://www.instagram.com/yourhandle', icon: 'bi:instagram' },
+    { name: 'instagram', url: 'https://www.instagram.com/yourhandle', icon: 'mdi:instagram' },
 ];
 ```
 
@@ -83,15 +79,9 @@ cp .env.example .env
 
 | Variable                            | Purpose                                     |
 |-------------------------------------|---------------------------------------------|
-| `RESEND_API_KEY`                    | Contact form email delivery                 |
-| `RESEND_FROM_EMAIL`                 | Sender address (must be verified in Resend) |
-| `RESEND_TO_EMAIL`                   | Where contact form submissions are sent     |
-| `PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN` | Cloudflare Web Analytics beacon             |
-| `PUBLIC_SENTRY_DSN`                 | Sentry client-side error tracking           |
-| `SENTRY_PROJECT`                    | Sentry project name                         |
-| `SENTRY_AUTH_TOKEN`                 | Sentry source map upload token              |
+| `PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN` | Cloudflare Web Analytics beacon (optional)  |
 
-All variables are optional — features degrade gracefully when keys are absent.
+All variables are optional.
 
 ## Writing Posts
 
@@ -142,8 +132,7 @@ src/
 │   ├── blog/            # Blog posts (.md / .mdx)
 │   └── pages/           # Static pages (.md / .mdx)
 ├── layouts/
-│   ├── BlogLayout.astro  # Main layout with sidebar
-│   └── PageLayout.astro  # Standalone page layout
+│   └── BlogLayout.astro  # Main layout with sidebar
 ├── pages/               # File-based routes
 ├── plugins/             # Custom rehype plugins
 ├── styles/
@@ -167,17 +156,21 @@ src/
 
 ## Deployment
 
-The project is configured for Vercel out of the box. Push to your repository and connect it to a Vercel project — no additional configuration is required.
+AstroRift outputs static HTML at build time (`output: 'static'`) with no server-side adapter required. It deploys to any static host:
 
-For other platforms, swap the adapter in `astro.config.mjs`. See the [Astro deployment docs](https://docs.astro.build/en/guides/deploy/) for options.
+- **Netlify** — connect your repository and set build command `yarn build`, publish directory `dist`
+- **Vercel** — same: build command `yarn build`, output directory `dist`
+- **Cloudflare Pages**, **GitHub Pages**, or any CDN — same dist output works everywhere
+
+See the [Astro deployment docs](https://docs.astro.build/en/guides/deploy/) for platform-specific guides.
 
 ## Color Scheme
 
 The theme uses CSS custom properties mapped into Tailwind via `@theme`. Edit `src/styles/global.css` to change the palette.
 
-| Variable       | Light              | Dark              |
-|----------------|--------------------|-------------------|
-| `--primary`    | `#5b21b6` (purple) | `#f59e0b` (amber) |
-| `--accent`     | `#7537e1`          | `#ffbf04`         |
-| `--background` | `#faf7ff`          | `#0d0a15`         |
-| `--text`       | `#4a3f5c`          | `#e8e0f5`         |
+| Variable       | Light                                                              | Dark                                                               |
+|----------------|--------------------------------------------------------------------|--------------------------------------------------------------------|
+| `--primary`    | `#5b21b6` ![#5b21b6](https://placehold.co/15x15/5b21b6/5b21b6.png) | `#f59e0b` ![#f59e0b](https://placehold.co/15x15/f59e0b/f59e0b.png) |
+| `--accent`     | `#7537e1` ![#7537e1](https://placehold.co/15x15/7537e1/7537e1.png) | `#ffbf04` ![#ffbf04](https://placehold.co/15x15/ffbf04/ffbf04.png)                                                         |
+| `--background` | `#faf7ff` ![#faf7ff](https://placehold.co/15x15/faf7ff/faf7ff.png) | `#0d0a15` ![#0d0a15](https://placehold.co/15x15/0d0a15/0d0a15.png)                                                         |
+| `--text`       | `#4a3f5c` ![#4a3f5c](https://placehold.co/15x15/4a3f5c/4a3f5c.png) | `#e8e0f5` ![#e8e0f5](https://placehold.co/15x15/e8e0f5/e8e0f5.png)                                                         |

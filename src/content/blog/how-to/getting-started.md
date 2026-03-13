@@ -24,8 +24,7 @@ AstroRift ships with everything a content-focused blog needs:
 - **Post navigation** — links to the previous and next post within the same category appear at the bottom of every article
 - **Reading time** — calculated automatically from the post word count
 - **SEO** — Open Graph tags, JSON-LD `BlogPosting` schema, sitemap, and robots.txt generated at build time
-- **Contact form** — built with Formik and Yup validation, sends email via [Resend](https://resend.com)
-- **Analytics & error tracking** — optional Cloudflare Web Analytics and Sentry integrations
+- **Analytics** — optional [Cloudflare Web Analytics](https://www.cloudflare.com/web-analytics/) integration
 
 ## Writing your first post
 
@@ -54,9 +53,9 @@ For the color scheme, everything lives in `src/styles/global.css` as CSS custom 
 
 ## Deployment
 
-AstroRift is configured for [Vercel](https://vercel.com) out of the box. Push the repository to GitHub, connect it to a Vercel project, and your site is live. For other platforms, swap the adapter in `astro.config.mjs`.
+AstroRift outputs static HTML at build time — no server required. It deploys to any static host with the same two settings: build command `yarn build`, publish directory `dist`.
 
-Copy `.env.example` to `.env` and fill in whichever integrations you want to use — contact form, analytics, and error tracking are all optional.
+Popular options include [Netlify](https://netlify.com), [Vercel](https://vercel.com), [Cloudflare Pages](https://pages.cloudflare.com), and [GitHub Pages](https://pages.github.com). If you want Cloudflare Web Analytics, copy `.env.example` to `.env` and add your beacon token.
 
 ## Going further
 
