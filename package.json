@@ -36,6 +36,8 @@
         "clsx": "^2.1.1",
         "date-fns": "^4.1.0",
         "hastscript": "^9.0.1",
+        "node-addon-api": "^8.6.0",
+        "node-gyp": "^12.2.0",
         "react": "^19.2.4",
         "react-dom": "^19.2.4",
         "reading-time": "^1.5.0",
@@ -79,5 +81,5 @@
     "resolutions": {
         "@emmetio/css-parser": "0.4.1"
     },
-    "packageManager": "yarn@4.12.0"
+    "packageManager": "yarn@4.13.0"
 }
