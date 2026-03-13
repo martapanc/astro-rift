@@ -1,4 +1,6 @@
-# AstroRift
+# astro/rift
+
+![Logo](https://astro-rift.netlify.app/_astro/logo.2I4M9DTt.png)
 
 A WordPress-inspired blog theme re-engineered with Astro 5 & React — fast, fully-featured, and ready to deploy.
 
