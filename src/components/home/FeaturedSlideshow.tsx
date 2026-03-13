@@ -199,7 +199,7 @@ export default function FeaturedSlideshow({ posts }: Props) {
 
             {/* Featured Title */}
             <div className="absolute top-6 left-6 z-20 md:top-8 md:left-10">
-                <h3 className="font-title rounded-md bg-black/35 px-3.5 pt-1 pb-2.5 text-xl font-semibold tracking-wide text-white backdrop-blur-md sm:text-3xl lg:text-5xl">
+                <h3 className="font-title rounded-md bg-black/35 px-3.5 py-1 text-xl font-semibold tracking-wide text-white backdrop-blur-md sm:text-3xl lg:text-5xl">
                     Highlights
                 </h3>
             </div>
