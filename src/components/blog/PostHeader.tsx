@@ -2,6 +2,7 @@ import type { CollectionEntry } from 'astro:content';
 import { Icon } from '@iconify/react';
 import { getMonthArchiveUrl } from '@/utils/archives.ts';
 import { FormattedDate } from '@/components/nav/FormattedDate.tsx';
+import { ui } from '@/consts.ts';
 
 type PostHeaderProps = {
     post: CollectionEntry<'blog'>;
@@ -45,7 +46,7 @@ function PostHeader({ post, readingMinutes }: PostHeaderProps) {
                 <div className="flex items-center gap-1">
                     <Icon icon="mdi:clock-time-four" width="20" height="20" />
 
-                    <span className="pt-0">Reading time: {readingMinutes} minutes</span>
+                    <span className="pt-0">{ui.post.readingTime}: {readingMinutes} {ui.post.readingTimeUnit}</span>
                 </div>
 
                 {tags && tags?.length > 0 && (

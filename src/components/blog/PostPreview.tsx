@@ -4,6 +4,7 @@ import { getMonthArchiveUrl } from '@/utils/archives.ts';
 import { FormattedDate } from '@/components/nav/FormattedDate.tsx';
 import { Icon } from '@iconify/react';
 import type { OptimizedImageData } from '@/utils/images';
+import { ui } from '@/consts.ts';
 
 type PostPreviewProps = {
     post: CollectionEntry<'blog'>;
@@ -39,7 +40,7 @@ export const PostPreview = ({ post, optimizedImage }: PostPreviewProps) => {
                     <a
                         href={`/category/${data.category.toLowerCase()}`}
                         className="text-accent w-fit text-sm font-medium hover:brightness-125"
-                        aria-label={`Categoria - ${data.category}`}
+                        aria-label={`${ui.post.categoryAriaLabel} - ${data.category}`}
                     >
                         {data.category}
                     </a>
@@ -53,7 +54,7 @@ export const PostPreview = ({ post, optimizedImage }: PostPreviewProps) => {
                         <a
                             href={monthArchiveUrl}
                             className="hover:text-accent flex items-center gap-1.5"
-                            aria-label="month"
+                            aria-label={ui.post.monthAriaLabel}
                         >
                             <Icon
                                 icon="mdi:calendar-month"

@@ -1,4 +1,5 @@
 import { ListItem, SidebarBox } from '@/components/shared/Box.tsx';
+import { ui } from '@/consts.ts';
 
 type Article = {
     id: string;
@@ -11,7 +12,7 @@ type LatestArticlesProps = {
 
 function LatestArticles({ articles }: LatestArticlesProps) {
     return (
-        <SidebarBox title="Latest Articles">
+        <SidebarBox title={ui.sidebar.latestArticles}>
             <ul className="flex flex-col">
                 {articles.map((article, index) => (
                     <ListItem key={article.id} last={index === articles.length - 1}>

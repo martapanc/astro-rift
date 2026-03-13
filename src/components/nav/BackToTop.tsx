@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import clsx from 'clsx';
+import { ui } from '@/consts.ts';
 
 export default function BackToTop() {
     const [isVisible, setIsVisible] = useState(false);
@@ -36,8 +37,8 @@ export default function BackToTop() {
                 'md:right-8 md:bottom-8 md:h-12 md:w-12',
                 isVisible ? 'visible opacity-100' : 'invisible opacity-0',
             )}
-            aria-label="Back to top"
-            title="Back to top"
+            aria-label={ui.backToTop}
+            title={ui.backToTop}
         >
             <svg
                 xmlns="http://www.w3.org/2000/svg"

@@ -1,7 +1,6 @@
 import { ListItem, SidebarBox } from '@/components/shared/Box.tsx';
-import { format } from 'date-fns';
-import { enGB } from 'date-fns/locale';
 import { capitalize } from '@/utils/string';
+import { SITE_LOCALE, ui } from '@/consts.ts';
 import clsx from 'clsx';
 
 type Archive = {
@@ -18,11 +17,11 @@ type ArchivesProps = {
 
 function Archives({ archives, currentYear, currentMonth }: ArchivesProps) {
     return (
-        <SidebarBox title="Archives">
+        <SidebarBox title={ui.sidebar.archives}>
             <ul className="flex flex-col">
                 {archives.map(({ year, month, count }, index) => {
                     const date = new Date(year, month - 1, 1);
-                    const monthName = format(date, 'MMMM', { locale: enGB });
+                    const monthName = new Intl.DateTimeFormat(SITE_LOCALE, { month: 'long' }).format(date);
                     const displayText = `${capitalize(monthName)} ${year}`;
                     const href = `/${year}/${String(month).padStart(2, '0')}`;
 

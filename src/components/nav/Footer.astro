@@ -4,9 +4,9 @@ import {
     SITE_DESCRIPTION_PLAIN,
     SITE_TITLE,
     social,
+    ui,
 } from '@/consts.ts';
 import { Icon } from 'astro-icon/components';
-import { getYear } from 'date-fns';
 const today = new Date();
 ---
 
@@ -25,7 +25,7 @@ const today = new Date();
             </div>
 
             <div class="social-links mt-4 flex justify-center gap-2">
-                <a href="/rss.xml" class="mx-1.5" aria-label="Feed RSS">
+                <a href="/rss.xml" class="mx-1.5" aria-label={ui.nav.rss}>
                     <Icon name="mdi:rss" class="h-5 w-5" />
                 </a>
                 {
@@ -41,7 +41,7 @@ const today = new Date();
     <div class="bg-[#0a0814]">
         <div class="container flex flex-col items-center gap-4 px-6 pt-6 pb-12 text-center">
             <span class="text-gray-300">
-                <a href={`mailto:${email}`} target="_blank">{email}</a> &copy; {getYear(today)}
+                <a href={`mailto:${email}`} target="_blank">{email}</a> &copy; {today.getFullYear()}
             </span>
             <div class="flex flex-wrap justify-center text-center text-pretty text-[#bbb]">
                 Made with 💙 by&nbsp;<a href="https://github.com/martapanc" target="_blank" class="text-white">martapanc</a>&nbsp;| Based on&nbsp;

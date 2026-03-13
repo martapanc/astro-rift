@@ -1,4 +1,5 @@
 import type { CollectionEntry } from 'astro:content';
+import { ui } from '@/consts.ts';
 
 interface Props {
     prev: CollectionEntry<'blog'> | null;
@@ -19,7 +20,7 @@ export default function PostNavigation({ prev, next }: Props) {
                         className="group flex flex-col justify-between text-left transition-colors hover:text-(--primary)"
                     >
                         <span className="mb-1.5 text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">
-                            Previous article
+                            {ui.post.previousArticle}
                         </span>
                         <span className="text-base font-medium group-hover:underline lg:text-lg">
                             {prev.data.title}
@@ -35,7 +36,7 @@ export default function PostNavigation({ prev, next }: Props) {
                         className="group flex flex-col justify-between text-right transition-colors hover:text-(--primary)"
                     >
                         <span className="mb-1.5 text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">
-                            Next article
+                            {ui.post.nextArticle}
                         </span>
                         <span className="text-base font-medium group-hover:underline lg:text-lg">
                             {next.data.title}

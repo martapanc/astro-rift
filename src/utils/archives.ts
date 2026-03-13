@@ -1,12 +1,13 @@
 import type { CollectionEntry } from 'astro:content';
-import { format, getYear, getMonth, isSameMonth, isSameYear } from 'date-fns';
-import { enGB } from 'date-fns/locale';
+import { SITE_LOCALE } from '@/consts.ts';
 
 /**
  * Format a date to YYYY/MM path format
  */
 export function getMonthArchiveUrl(date: Date): string {
-    return `/${format(date, 'yyyy/MM')}`;
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    return `/${year}/${month}`;
 }
 
 /**
@@ -19,8 +20,8 @@ export function getUniqueMonths(
 
     posts.forEach((post) => {
         const date = post.data.pubDate;
-        const year = getYear(date);
-        const month = getMonth(date) + 1; // getMonth is 0-indexed
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1; // getMonth is 0-indexed
         monthsSet.add(`${year}-${month}`);
     });
 
@@ -43,20 +44,18 @@ export function getPostsByMonth(
     year: number,
     month: number,
 ): CollectionEntry<'blog'>[] {
-    const targetDate = new Date(year, month - 1, 1);
-
     return posts.filter((post) => {
-        const postDate = post.data.pubDate;
-        return isSameMonth(postDate, targetDate) && isSameYear(postDate, targetDate);
+        const d = post.data.pubDate;
+        return d.getFullYear() === year && d.getMonth() + 1 === month;
     });
 }
 
 /**
- * Get the formatted month name the chosen locale
+ * Get the formatted month name in the configured locale
  */
 export function getMonthName(month: number): string {
     const date = new Date(2000, month - 1, 1);
-    return format(date, 'MMMM', { locale: enGB });
+    return new Intl.DateTimeFormat(SITE_LOCALE, { month: 'long' }).format(date);
 }
 
 /**
@@ -66,7 +65,7 @@ export function getUniqueYears(posts: CollectionEntry<'blog'>[]): number[] {
     const yearsSet = new Set<number>();
 
     posts.forEach((post) => {
-        yearsSet.add(getYear(post.data.pubDate));
+        yearsSet.add(post.data.pubDate.getFullYear());
     });
 
     return Array.from(yearsSet).sort((a, b) => b - a); // Descending order
@@ -79,5 +78,5 @@ export function getPostsByYear(
     posts: CollectionEntry<'blog'>[],
     year: number,
 ): CollectionEntry<'blog'>[] {
-    return posts.filter((post) => getYear(post.data.pubDate) === year);
+    return posts.filter((post) => post.data.pubDate.getFullYear() === year);
 }

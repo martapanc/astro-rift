@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Icon } from '@iconify/react';
+import { ui } from '@/consts.ts';
 
 interface SocialShareProps {
     url: string;
@@ -39,17 +40,17 @@ export function SocialShare({ url, title }: SocialShareProps) {
     return (
         <div className="my-8 flex flex-col rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-800 dark:bg-[#201e27]">
             <h3 className="mb-3 text-sm font-semibold text-gray-700 dark:text-gray-300">
-                Share article
+                {ui.post.shareArticle}
             </h3>
             <div className="flex flex-wrap gap-2">
                 {/* Copy Link */}
                 <button
                     onClick={handleCopy}
                     className="flex items-center gap-2 rounded-md bg-gray-200 px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-300 sm:w-24 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
-                    title="Copy link"
+                    title={ui.post.copyLink}
                 >
                     <Icon icon={copied ? 'mdi:check' : 'mdi:content-copy'} width="20" height="20" />
-                    <span className="hidden sm:inline">{copied ? 'Copied!' : 'Copy'}</span>
+                    <span className="hidden sm:inline">{copied ? ui.post.copied : ui.post.copy}</span>
                 </button>
 
                 {/* Email */}

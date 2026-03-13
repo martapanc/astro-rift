@@ -1,5 +1,6 @@
 ---
 import Search from 'astro-pagefind/components/Search';
+import { ui } from '@/consts.ts';
 
 interface Props {
     postUrls?: string[];
@@ -9,7 +10,7 @@ const { postUrls = [] } = Astro.props;
 ---
 
 <div class="light:border light:border-border bg-background2 rounded-lg p-4 shadow-md">
-    <h2 class="font-header wp-block-heading mb-5 py-1 text-xl font-semibold">Search</h2>
+    <h2 class="font-header wp-block-heading mb-5 py-1 text-xl font-semibold">{ui.sidebar.search}</h2>
     <Search
         id="search"
         className="pagefind-ui"
@@ -21,13 +22,13 @@ const { postUrls = [] } = Astro.props;
     {
         postUrls.length > 0 && (
             <div class="mt-4 text-center">
-                <span class="text-sm text-gray-500">...or </span>
+                <span class="text-sm text-gray-500">{ui.sidebar.randomArticleOr}</span>
                 <button
                     id="random-article-btn"
                     class="text-primary hover:text-accent cursor-pointer text-sm font-medium underline transition-colors"
                     data-posts={JSON.stringify(postUrls)}
                 >
-                    read a random article
+                    {ui.sidebar.randomArticle}
                 </button>
             </div>
         )

@@ -3,10 +3,10 @@ import Header from '@/components/nav/Header.astro';
 import Footer from '@/components/nav/Footer.astro';
 import BaseHead from '@/components/nav/BaseHead.astro';
 import { Icon } from 'astro-icon/components';
-import { SITE_LANG } from '@/consts.ts';
+import { SITE_LANG, ui } from '@/consts.ts';
 
-const title = '404 - Page not found';
-const description = 'The page you are looking for does not exist.';
+const title = ui.notFound.title;
+const description = ui.notFound.description;
 ---
 
 <!doctype html>
@@ -29,16 +29,16 @@ const description = 'The page you are looking for does not exist.';
                 <h2
                     class="mb-4 text-2xl font-semibold text-gray-800 md:text-3xl dark:text-gray-200"
                 >
-                    Oops! Not found
+                    {ui.notFound.heading}
                 </h2>
                 <p class="mb-8 text-base text-gray-600 md:text-lg dark:text-gray-400">
-                    The page you've been looking for doesn't seem to exist
+                    {ui.notFound.body}
                 </p>
                 <button
                     onclick="history.back()"
                     class="bg-primary hover:bg-accent cursor-pointer rounded-lg px-6 py-3 text-white transition-colors"
                 >
-                    Go Back
+                    {ui.notFound.goBack}
                 </button>
             </div>
         </div>

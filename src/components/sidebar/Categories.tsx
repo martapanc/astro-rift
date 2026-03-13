@@ -1,6 +1,7 @@
 import { ListItem, SidebarBox } from '@/components/shared/Box.tsx';
 import { capitalize } from '@/utils/string';
 import clsx from 'clsx';
+import { ui } from '@/consts.ts';
 
 export type Category = {
     name: string;
@@ -14,7 +15,7 @@ type CategoriesProps = {
 
 function Categories({ categories, currentCategory }: CategoriesProps) {
     return (
-        <SidebarBox title="Categories">
+        <SidebarBox title={ui.sidebar.categories}>
             <ul className="flex flex-col">
                 {categories.map((category, index) => {
                     const isCurrent =

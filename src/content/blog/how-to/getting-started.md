@@ -51,6 +51,24 @@ Open `src/consts.ts` to change the site title, description, navigation menu, and
 
 For the color scheme, everything lives in `src/styles/global.css` as CSS custom properties. The light mode uses purples and the dark mode switches to ambers — swap in any palette you like.
 
+### Language and UI strings
+
+`src/consts.ts` also contains two exports for localisation. `SITE_LOCALE` is a BCP 47 tag that controls how dates are formatted across the site (using the native `Intl.DateTimeFormat` API). The `ui` object holds every interface string — sidebar titles, pagination labels, share widget copy, 404 messages, and more — all in one place.
+
+To switch language, change the locale and replace the strings:
+
+```ts
+export const SITE_LOCALE = 'fr-FR';
+
+export const ui = {
+    pagination: { previous: 'Précédent', next: 'Suivant', ... },
+    post: { readingTime: 'Temps de lecture', readingTimeUnit: 'minutes', ... },
+    // ...
+};
+```
+
+No component files need to be touched — the changes propagate automatically.
+
 ## Deployment
 
 AstroRift outputs static HTML at build time — no server required. It deploys to any static host with the same two settings: build command `yarn build`, publish directory `dist`.

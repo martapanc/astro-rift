@@ -3,6 +3,7 @@ import { PostPreview } from '@/components/blog/PostPreview.tsx';
 import { Icon } from '@iconify/react';
 import type { PostWithOptimizedImage } from '@/utils/images';
 import clsx from 'clsx';
+import { ui } from '@/consts.ts';
 
 function PostList({
     posts,
@@ -42,7 +43,7 @@ function PostList({
                                 }
                                 className="h-4 w-4"
                             />
-                            {ascending ? 'Oldest first' : 'Newest first'}
+                            {ascending ? ui.postList.oldestFirst : ui.postList.newestFirst}
                         </button>
                     </div>
                 )}

@@ -1,4 +1,5 @@
 import { SidebarBox } from '@/components/shared/Box.tsx';
+import { ui } from '@/consts.ts';
 
 type Tag = {
     name: string;
@@ -31,7 +32,7 @@ function Tags({ tags, maxTags = 25, minFontSize = 12, maxFontSize = 20 }: TagsPr
     };
 
     return (
-        <SidebarBox title="Tags" className="tag-cloud">
+        <SidebarBox title={ui.sidebar.tags} className="tag-cloud">
             <div className="flex flex-wrap gap-2">
                 {topTags.map((tag) => {
                     const fontSize = getFontSize(tag.count);

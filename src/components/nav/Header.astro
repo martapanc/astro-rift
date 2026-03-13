@@ -1,5 +1,5 @@
 ---
-import { SITE_DESCRIPTION, social, menu } from '@/consts.ts';
+import { SITE_DESCRIPTION, social, menu, ui } from '@/consts.ts';
 import type { MenuItem } from '@/consts.ts';
 import HeaderLink from './HeaderLink.astro';
 import DarkModeToggle from './DarkModeToggle.astro';
@@ -27,7 +27,7 @@ const isDropdownActive = (item: MenuItem) => {
                 <button
                     id="mobile-menu-toggle"
                     class="relative h-10 w-10 cursor-pointer rounded-lg p-1 hover:bg-gray-100"
-                    aria-label="Toggle menu"
+                    aria-label={ui.nav.toggleMenu}
                 >
                     <Icon
                         id="menu-icon"

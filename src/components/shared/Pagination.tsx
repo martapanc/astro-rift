@@ -1,14 +1,15 @@
 import type { ReactNode } from 'react';
 import clsx from 'clsx';
+import { ui } from '@/consts.ts';
 
 export interface PaginationProps {
     currentPage: number;
     lastPage: number;
-    urlPattern: string; // Pattern like "/2" or "/category/patriarcato/2"
+    urlPattern: string; // Pattern like "/2" or "/category/welcome/2"
 }
 
 const navButtonStyles = {
-    base: 'bg-background2 flex items-center gap-1 rounded-lg border px-4 py-2 text-black dark:text-white',
+    base: 'bg-background2 flex items-center gap-1 rounded-lg border px-4 py-2 text-black dark:text-white min-w-24',
     active: 'transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-950',
     disabled: 'opacity-55 dark:opacity-50 cursor-default',
 };
@@ -18,12 +19,14 @@ interface NavButtonProps {
     disabled?: boolean;
     children: ReactNode;
     ariaLabel: string;
+    next?: boolean;
 }
 
-function NavButton({ href, disabled, children, ariaLabel }: NavButtonProps) {
+function NavButton({ href, disabled, children, ariaLabel, next }: NavButtonProps) {
     const className = clsx(
         navButtonStyles.base,
         disabled ? navButtonStyles.disabled : navButtonStyles.active,
+        next && 'justify-end'
     );
 
     if (disabled || !href) {
@@ -60,13 +63,13 @@ function PageButton({ page, href, isCurrent }: PageButtonProps) {
 
     if (isCurrent) {
         return (
-            <span className={className} aria-label={`Page ${page}`} aria-current="page">
+            <span className={className} aria-label={`${ui.pagination.page} ${page}`} aria-current="page">
                 {page}
             </span>
         );
     }
     return (
-        <a href={href} className={className} aria-label={`Page ${page}`}>
+        <a href={href} className={className} aria-label={`${ui.pagination.page} ${page}`}>
             {page}
         </a>
     );
@@ -126,7 +129,7 @@ export default function Pagination({ currentPage, lastPage, urlPattern }: Pagina
                 ariaLabel="Previous page"
             >
                 <span>←</span>
-                <span className="hidden sm:inline">Precedente</span>
+                <span className="hidden sm:inline">{ui.pagination.previous}</span>
             </NavButton>
 
             <div className="flex items-center gap-1">
@@ -153,8 +156,9 @@ export default function Pagination({ currentPage, lastPage, urlPattern }: Pagina
                 href={currentPage < lastPage ? getPageUrl(currentPage + 1) : undefined}
                 disabled={currentPage >= lastPage}
                 ariaLabel="Next page"
+                next
             >
-                <span className="hidden sm:inline">Successivo</span>
+                <span className="hidden sm:inline">{ui.pagination.next}</span>
                 <span>→</span>
             </NavButton>
         </nav>

@@ -3,6 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import { getPostExcerpt } from '@/utils/excerpt';
 import type { OptimizedImageData } from '@/utils/images';
 import clsx from 'clsx';
+import { ui } from '@/consts.ts';
 
 interface FeaturedPost {
     post: CollectionEntry<'blog'>;
@@ -115,7 +116,7 @@ function NavigationButton({ direction, onClick }: NavigationButtonProps) {
                 'sm:top-1/2 sm:h-12 sm:w-12 sm:-translate-y-1/2',
                 isPrevious ? 'left-4' : 'right-4',
             )}
-            aria-label={`${isPrevious ? 'Previous' : 'Next'} slide`}
+            aria-label={isPrevious ? ui.slideshow.previousSlide : ui.slideshow.nextSlide}
         >
             <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -200,7 +201,7 @@ export default function FeaturedSlideshow({ posts }: Props) {
             {/* Featured Title */}
             <div className="absolute top-6 left-6 z-20 md:top-8 md:left-10">
                 <h3 className="font-title rounded-md bg-black/35 px-3.5 py-1 text-xl font-semibold tracking-wide text-white backdrop-blur-md sm:text-3xl lg:text-5xl">
-                    Highlights
+                    {ui.slideshow.title}
                 </h3>
             </div>
 

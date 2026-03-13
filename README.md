@@ -17,6 +17,7 @@ A WordPress-inspired blog theme re-engineered with Astro 5 & React — fast, ful
 - **Sitemap & robots.txt** — generated automatically at build time
 - **Reading time** — calculated per post
 - **Bibliography support** — custom rehype plugin for academic-style citations
+- **i18n-ready** — all UI strings and the date locale are centralised in `src/consts.ts`
 - **Analytics** — Cloudflare Web Analytics (optional)
 - **Static output** — deploys to Netlify, Vercel, Cloudflare Pages, GitHub Pages, or any static host
 
@@ -70,6 +71,26 @@ export const social = [
     { name: 'instagram', url: 'https://www.instagram.com/yourhandle', icon: 'mdi:instagram' },
 ];
 ```
+
+### Language & UI strings
+
+`src/consts.ts` also contains two exports for localisation:
+
+```ts
+// BCP 47 locale tag — controls date formatting across the site
+export const SITE_LOCALE = 'en-GB';
+
+// All interface strings in one place — translate these to change the UI language
+export const ui = {
+    nav: { toggleMenu: 'Toggle menu', ... },
+    sidebar: { categories: 'Categories', tags: 'Tags', ... },
+    post: { readingTime: 'Reading time', previousArticle: 'Previous article', ... },
+    pagination: { previous: 'Previous', next: 'Next', ... },
+    // ...
+};
+```
+
+To translate the interface, change `SITE_LOCALE` to the target BCP 47 tag (e.g. `'it-IT'`, `'fr-FR'`) and replace the string values in `ui` with your translations. Date formatting uses the native `Intl.DateTimeFormat` API and will follow the locale automatically.
 
 ### Environment variables
 

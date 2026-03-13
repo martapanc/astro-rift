@@ -1,5 +1,4 @@
-import { format } from 'date-fns';
-import { enGB } from 'date-fns/locale';
+import { SITE_LOCALE } from '@/consts.ts';
 
 interface FormattedDateProps {
     date: Date | string;
@@ -7,9 +6,10 @@ interface FormattedDateProps {
 
 export function FormattedDate({ date }: FormattedDateProps) {
     const dateObj = typeof date === 'string' ? new Date(date) : date;
-    return (
-        <time dateTime={dateObj.toISOString()}>
-            {format(dateObj, 'd MMMM yyyy', { locale: enGB })}
-        </time>
-    );
+    const formatted = new Intl.DateTimeFormat(SITE_LOCALE, {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+    }).format(dateObj);
+    return <time dateTime={dateObj.toISOString()}>{formatted}</time>;
 }

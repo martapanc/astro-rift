@@ -1,5 +1,6 @@
 import type { CollectionEntry } from 'astro:content';
 import { Box } from '@/components/shared/Box.tsx';
+import { ui } from '@/consts.ts';
 
 interface Props {
     posts: CollectionEntry<'blog'>[];
@@ -13,7 +14,7 @@ export default function LatestPostsGrid({ posts }: Props) {
     return (
         <Box className="mt-5 p-5 lg:mt-7">
             <h3 className="font-header text-text wp-block-heading mb-6 text-3xl font-semibold">
-                Latest articles
+                {ui.latestPosts.title}
             </h3>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                 {posts.map((post) => (
