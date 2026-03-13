@@ -6,7 +6,6 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import icon from 'astro-icon';
 import react from '@astrojs/react';
-import vercel from '@astrojs/vercel';
 import rehypeQuoteAuthor from './src/plugins/rehype-quote-author.ts';
 import rehypeBibliography from './src/plugins/rehype-bibliography.ts';
 import rehypeExternalLinks from './src/plugins/rehype-external-links.ts';
@@ -17,10 +16,6 @@ import pagefind from 'astro-pagefind';
 export default defineConfig({
     site: 'https://sample-site.com',
     output: 'static',
-    adapter: vercel({
-        edgeMiddleware: false,
-        imageService: true,
-    }),
     markdown: {
         remarkPlugins: [remarkGfm],
         rehypePlugins: [rehypeQuoteAuthor, rehypeBibliography, rehypeExternalLinks],
