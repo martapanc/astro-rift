@@ -171,6 +171,6 @@ The theme uses CSS custom properties mapped into Tailwind via `@theme`. Edit `sr
 | Variable       | Light                                                              | Dark                                                               |
 |----------------|--------------------------------------------------------------------|--------------------------------------------------------------------|
 | `--primary`    | `#5b21b6` ![#5b21b6](https://placehold.co/15x15/5b21b6/5b21b6.png) | `#f59e0b` ![#f59e0b](https://placehold.co/15x15/f59e0b/f59e0b.png) |
-| `--accent`     | `#7537e1` ![#7537e1](https://placehold.co/15x15/7537e1/7537e1.png) | `#ffbf04` ![#ffbf04](https://placehold.co/15x15/ffbf04/ffbf04.png)                                                         |
-| `--background` | `#faf7ff` ![#faf7ff](https://placehold.co/15x15/faf7ff/faf7ff.png) | `#0d0a15` ![#0d0a15](https://placehold.co/15x15/0d0a15/0d0a15.png)                                                         |
-| `--text`       | `#4a3f5c` ![#4a3f5c](https://placehold.co/15x15/4a3f5c/4a3f5c.png) | `#e8e0f5` ![#e8e0f5](https://placehold.co/15x15/e8e0f5/e8e0f5.png)                                                         |
+| `--accent`     | `#7537e1` ![#7537e1](https://placehold.co/15x15/7537e1/7537e1.png) | `#ffbf04` ![#ffbf04](https://placehold.co/15x15/ffbf04/ffbf04.png) |
+| `--background` | `#faf7ff` ![#faf7ff](https://placehold.co/15x15/faf7ff/faf7ff.png) | `#0d0a15` ![#0d0a15](https://placehold.co/15x15/0d0a15/0d0a15.png) |
+| `--text`       | `#4a3f5c` ![#4a3f5c](https://placehold.co/15x15/4a3f5c/4a3f5c.png) | `#e8e0f5` ![#e8e0f5](https://placehold.co/15x15/e8e0f5/e8e0f5.png) |
