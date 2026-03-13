@@ -4,6 +4,9 @@
 
 A WordPress-inspired blog theme re-engineered with Astro 5 & React — fast, fully-featured, and ready to deploy.
 
+![Netlify](https://img.shields.io/netlify/29308293-2695-41eb-aeb7-f0b0c021932f?style=for-the-badge) <a href="https://astro-rift.netlify.app" target="_blank"><img src="https://img.shields.io/badge/Demo-5b21b6?style=for-the-badge&logoColor=white" alt="Live Demo" /></a>&nbsp;
+
+
 ## Features
 
 - **Astro 5 + React 19** — island architecture for optimal performance
