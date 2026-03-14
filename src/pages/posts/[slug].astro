@@ -29,7 +29,6 @@ const post = Astro.props;
 const { Content } = await render(post);
 const { title, heroImage } = post.data;
 const description = getPostExcerpt(post);
-const isEnglishPost = post.id.endsWith('-en');
 const locale = SITE_LANG;
 const author = SITE_TITLE;
 const socialHandle = `@${SITE_TITLE}`;
