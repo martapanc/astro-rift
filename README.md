@@ -9,7 +9,7 @@ A WordPress-inspired blog theme re-engineered with Astro 5 & React — fast, ful
 
 ## Features
 
-- **Astro 5 + React 19** — island architecture for optimal performance
+- **Astro 6 + React 19** — island architecture for optimal performance
 - **MDX support** — mix Markdown with React components in your posts
 - **Dark mode** — class-based toggle with smooth transitions
 - **Full-text search** — powered by Pagefind, works without a backend
@@ -28,7 +28,7 @@ A WordPress-inspired blog theme re-engineered with Astro 5 & React — fast, ful
 
 | Layer      | Technology                          |
 |------------|-------------------------------------|
-| Framework  | Astro 5                             |
+| Framework  | Astro 6                             |
 | UI         | React 19                            |
 | Styling    | Tailwind CSS 4                      |
 | Markdown   | MDX, remark-gfm                     |
